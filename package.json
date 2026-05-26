@@ -1,0 +1,17 @@
+{
+  "name": "sjbv-tampin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Church of St. John Marie Vianney, Tampin.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
