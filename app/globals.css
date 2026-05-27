@@ -108,6 +108,8 @@ a { color: inherit; }
 .card-number { font-family: 'EthicSerif-Light', serif; color: var(--brown); font-size: .85rem; letter-spacing: 3px; margin-bottom: .8rem; text-transform: uppercase; }
 .life-card h2 { font-family: 'EthicSerif-Light', serif; font-size: clamp(2.4rem,5vw,4.5rem); font-weight: 400; color: var(--navy); line-height: 1.12; margin-bottom: 1.4rem; }
 .life-card p { color: var(--navy); font-size: clamp(1.05rem,1.7vw,1.28rem); max-width: 620px; margin: 0 auto; }
+.life-closing-image { width: 100vw; margin: 5rem 0 -6rem 50%; transform: translateX(-50%); }
+.life-closing-image img { width: 100%; display: block; object-fit: cover; }
 
 .readings-hero, .rosary-hero, .news-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.22), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
 .rosary-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 52%, rgba(197,160,89,.16), transparent 34%); }

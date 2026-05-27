@@ -44,6 +44,9 @@ export default function LifePage() {
             </article>
           ))}
         </div>
+        <section className="life-closing-image" aria-label="St. John Marie Vianney and church artwork">
+          <img src="/life/finale.png" alt="St. John Marie Vianney with Church of St. John Marie Vianney" />
+        </section>
       </main>
       <Footer />
     </>
