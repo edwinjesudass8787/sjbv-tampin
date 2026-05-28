@@ -18,7 +18,7 @@ export async function getArchiveItems() {
         title: item.title || 'Archive item',
         description: item.description || '',
         category: item.category || 'General',
-        imageUrl: item.imageUrl,
+        imageUrl: toDirectImageUrl(item.imageUrl),
         order: Number(item.order) || 9999,
       }))
       .sort((a, b) => a.order - b.order || b.date.localeCompare(a.date));
@@ -69,4 +69,15 @@ function parseCsv(csv) {
   }
 
   return rows;
+}
+
+function toDirectImageUrl(url) {
+  if (!url) return url;
+  // Convert Google Drive viewer URLs to direct image URLs
+  const driveMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (driveMatch) {
+    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}=w1600`;
+  }
+  // Already a direct URL
+  return url;
 }

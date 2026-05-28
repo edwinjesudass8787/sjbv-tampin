@@ -31,6 +31,8 @@ To use Google Drive images:
 https://lh3.googleusercontent.com/d/FILE_ID=w1600
 ```
 
+The site also auto-converts `https://drive.google.com/uc?export=view&id=FILE_ID` URLs to direct image URLs, but using `lh3.googleusercontent.com` directly is more reliable.
+
 ## Publish The Sheet
 
 1. In Google Sheets, choose `File` > `Share` > `Publish to web`
