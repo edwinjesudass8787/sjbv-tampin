@@ -33,7 +33,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'EthicSerif-Light', 'Lato', serif; background: var(--black); color: var(--text-light); line-height: 1.7; overflow-x: hidden; }
+body { font-family: 'EthicSerif-Light', 'Lato', serif; background-color: var(--black); background-image: radial-gradient(ellipse at 50% 0%, rgba(197,160,89,.06) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(197,160,89,.025) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(197,160,89,.025) 0%, transparent 40%), repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(197,160,89,.015) 41px, transparent 42px); color: var(--text-light); line-height: 1.7; overflow-x: hidden; }
 a { color: inherit; }
 
 .site-nav { position: fixed; top: 0; width: 100%; padding: .85rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: var(--black); border-bottom: 1px solid rgba(197,160,89,.18); box-shadow: 0 2px 20px rgba(0,0,0,.45); }
