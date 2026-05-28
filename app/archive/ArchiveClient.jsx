@@ -32,25 +32,19 @@ export default function ArchiveClient({ items }) {
 
   return (
     <>
-      <div className="archive-timeline">
+      <div className="archive-grid">
         {items.map((item, index) => (
-          <article className="archive-item" key={`${item.title}-${index}`}>
-            <div className="archive-marker" />
-            <div className="archive-content">
-              {item.date && <time className="archive-date">{item.date}</time>}
-              <span className="archive-category">{item.category}</span>
+          <figure className="archive-card" key={`${item.title}-${index}`}>
+            <button type="button" onClick={() => setSelected(item)} aria-label={`Open ${item.title}`}>
+              <img src={item.imageUrl} alt={item.title} loading="lazy" />
+            </button>
+            <figcaption>
+              <span className="archive-card-category">{item.category}</span>
               <h2>{item.title}</h2>
+              {item.date && <time>{item.date}</time>}
               {item.description && <p>{item.description}</p>}
-              <button
-                type="button"
-                className="archive-image-trigger"
-                onClick={() => setSelected(item)}
-                aria-label={`View ${item.title}`}
-              >
-                <img src={item.imageUrl} alt={item.title} loading="lazy" />
-              </button>
-            </div>
-          </article>
+            </figcaption>
+          </figure>
         ))}
       </div>
 
