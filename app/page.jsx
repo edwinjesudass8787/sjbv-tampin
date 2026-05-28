@@ -65,6 +65,17 @@ export default async function HomePage() {
             <MassCard key={`${mass.day}-${mass.time}`} {...mass} />
           ))}
         </div>
+        <div className="bulletin-board">
+          <a 
+            href="https://drive.google.com/drive/folders/1HRojZr3m8KbAkJCk75-qytI2-3uoFWQF?usp=sharing" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bulletin-button"
+          >
+            <span className="bulletin-icon">📰</span>
+            Bulletin Board
+          </a>
+        </div>
       </section>
 
       <section className="section contact" id="contact">

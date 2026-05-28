@@ -77,6 +77,10 @@ a { color: inherit; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1000px; margin: 0 auto; align-items: start; }
 .mass-card { background: var(--dark-gray); border: 1px solid rgba(197,160,89,.22); padding: 2.5rem 2rem; text-align: center; transition: transform .3s ease; }
 .mass-card:hover { transform: translateY(-5px); }
+.bulletin-board { display: flex; justify-content: center; margin-top: 2.5rem; }
+.bulletin-button { display: inline-flex; align-items: center; gap: .75rem; padding: 1rem 2rem; border: 1px solid rgba(197,160,89,.4); background: rgba(197,160,89,.08); color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: .9rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all .3s ease; }
+.bulletin-button:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.bulletin-icon { font-size: 1.1rem; }
 .day, .contact-item h3 { font-family: 'EthicSerif-Light', serif; color: var(--gold); letter-spacing: 2px; }
 .time { font-family: 'EthicSerif-Light', serif; color: var(--white); font-size: 1.6rem; margin: .8rem 0; }
 .language, .note, .contact-item p { color: var(--text-muted); }
