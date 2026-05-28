@@ -73,7 +73,7 @@ function isApproved(post) {
   return ['yes', 'y', 'true', 'approved', 'publish', 'published'].includes(value);
 }
 
-function firstValue(value) {
+function firstValue(value = '') {
   return value.split(',').map((item) => item.trim()).filter(Boolean)[0] || '';
 }
 
