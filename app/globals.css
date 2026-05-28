@@ -376,7 +376,7 @@ a { color: inherit; }
   .companion-header { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .7rem 1rem; background: rgba(18,18,18,.95); border-bottom: 1px solid rgba(197,160,89,.15); }
   .companion-mystery { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: .9rem; letter-spacing: 1px; }
   .companion-decade { color: var(--text-muted); font-size: .78rem; font-style: italic; }
-  .companion-beads { display: flex; gap: 5px; padding: .5rem 1rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; background: rgba(10,10,10,.92); border-bottom: 1px solid rgba(197,160,89,.12); }
+  .companion-beads { display: flex; gap: 5px; padding: .5rem 1rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; background: rgba(10,10,10,.92); }
   .companion-beads::-webkit-scrollbar { display: none; }
   .companion-bead { flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.18); cursor: pointer; transition: all .2s ease; }
   .companion-bead.large { width: 10px; height: 10px; background: rgba(197,160,89,.5); }

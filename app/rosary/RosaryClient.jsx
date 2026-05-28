@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const mysteries = {
   joyful: {
@@ -107,6 +107,16 @@ export default function RosaryClient() {
   const goNext = () => setCurrent(Math.min(beads.length - 1, current + 1));
   const goPrev = () => setCurrent(Math.max(0, current - 1));
 
+  const beadStripRef = useRef(null);
+
+  useEffect(() => {
+    if (!beadStripRef.current) return;
+    const active = beadStripRef.current.querySelector('.companion-bead.current');
+    if (active) {
+      active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [current]);
+
   return (
     <div className="rosary-shell">
       {/* Progress bar — always visible */}
@@ -168,7 +178,12 @@ export default function RosaryClient() {
           <span className="companion-mystery">{selectedMystery.label}</span>
           {currentBead.mystery && <span className="companion-decade">{currentBead.mystery}</span>}
         </div>
-        <div className="companion-beads">
+        <h2 className="companion-title">{currentBead.prayer.title}</h2>
+        <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
+        <div className="companion-text">
+          <p>{currentBead.prayer.text}</p>
+        </div>
+        <div className="companion-beads" ref={beadStripRef}>
           {beads.map((bead, index) => (
             <button
               key={`mb-${index}`}
@@ -178,11 +193,6 @@ export default function RosaryClient() {
               aria-label={`${bead.section}: ${bead.label}`}
             />
           ))}
-        </div>
-        <h2 className="companion-title">{currentBead.prayer.title}</h2>
-        <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
-        <div className="companion-text">
-          <p>{currentBead.prayer.text}</p>
         </div>
         <div className="companion-controls">
           <button type="button" className="companion-prev" onClick={goPrev} disabled={current === 0} aria-label="Previous prayer">
