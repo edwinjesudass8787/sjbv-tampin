@@ -216,14 +216,26 @@ a { color: inherit; }
 
 .gallery-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.22), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
 .gallery-main { padding: 4rem 5% 6rem; background: var(--black); }
+.gallery-groups { max-width: 1280px; margin: 0 auto; display: grid; gap: 3.5rem; }
+.gallery-group-header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; padding-bottom: .9rem; border-bottom: 1px solid rgba(197,160,89,.2); }
+.gallery-group-header h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; }
+.gallery-group-header span { color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; font-size: .78rem; white-space: nowrap; }
 .gallery-grid { max-width: 1280px; margin: 0 auto; columns: 3 280px; column-gap: 1.4rem; }
 .gallery-card { display: inline-block; width: 100%; margin: 0 0 1.4rem; overflow: hidden; border: 1px solid rgba(197,160,89,.22); background: linear-gradient(135deg, rgba(26,26,26,.96), rgba(12,12,12,.98)); box-shadow: 0 18px 44px rgba(0,0,0,.3); break-inside: avoid; }
-.gallery-card a { display: block; overflow: hidden; }
+.gallery-card button { display: block; width: 100%; overflow: hidden; border: 0; background: transparent; cursor: zoom-in; }
 .gallery-card img { display: block; width: 100%; min-height: 220px; object-fit: cover; transition: transform .35s ease, filter .35s ease; }
 .gallery-card:hover img { transform: scale(1.035); filter: saturate(1.08); }
 .gallery-card figcaption { padding: 1.1rem 1.2rem 1.25rem; }
 .gallery-card h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: 1.25rem; line-height: 1.25; margin-bottom: .4rem; }
 .gallery-card p { color: var(--text-muted); font-size: .98rem; line-height: 1.6; }
+.gallery-modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 1.5rem; background: rgba(0,0,0,.86); backdrop-filter: blur(8px); }
+.gallery-modal-card { position: relative; width: min(1100px, 100%); max-height: 92vh; overflow: auto; border: 1px solid rgba(197,160,89,.28); background: linear-gradient(135deg, rgba(26,26,26,.98), rgba(8,8,8,.98)); box-shadow: 0 26px 70px rgba(0,0,0,.6); }
+.gallery-modal-card img { display: block; width: 100%; max-height: 72vh; object-fit: contain; background: #050505; }
+.gallery-modal-caption { padding: 1.2rem 1.4rem 1.5rem; }
+.gallery-modal-caption h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: clamp(1.45rem, 3vw, 2.1rem); line-height: 1.2; margin-bottom: .4rem; }
+.gallery-modal-caption p { color: var(--text-light); }
+.gallery-modal-close { position: absolute; top: .9rem; right: .9rem; z-index: 1; padding: .65rem .9rem; border: 1px solid rgba(197,160,89,.45); background: rgba(10,10,10,.82); color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-size: .72rem; cursor: pointer; }
+.gallery-modal-close:hover { background: var(--gold); color: var(--black); }
 .gallery-empty { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; border: 1px solid rgba(197,160,89,.24); background: rgba(26,26,26,.72); }
 .gallery-empty h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; margin-bottom: .8rem; }
 .gallery-empty p { color: var(--text-muted); }

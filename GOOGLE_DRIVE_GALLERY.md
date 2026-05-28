@@ -6,10 +6,10 @@ The gallery page reads image rows from a published Google Sheet. A Google Apps S
 
 Create a new Google Sheet with one tab named `Gallery` and these headers in row 1:
 
-| fileId | title | caption | order | thumbnailUrl | imageUrl | updatedAt |
-|---|---|---|---|---|---|---|
+| fileId | title | caption | group_name | order | thumbnailUrl | imageUrl | updatedAt |
+|---|---|---|---|---|---|---|---|
 
-The website requires `fileId`. It displays `title` and `caption`. The `order` column controls sorting.
+The website requires `fileId`. It displays `title` and `caption`. The `group_name` column groups photos under headings, and the `order` column controls sorting within each group.
 
 ## Apps Script
 
@@ -22,7 +22,7 @@ The website requires `fileId`. It displays `title` and `caption`. The `order` co
 ```javascript
 const FOLDER_ID = 'PASTE_FOLDER_ID_HERE';
 const SHEET_NAME = 'Gallery';
-const HEADERS = ['fileId', 'title', 'caption', 'order', 'thumbnailUrl', 'imageUrl', 'updatedAt'];
+const HEADERS = ['fileId', 'title', 'caption', 'group_name', 'order', 'thumbnailUrl', 'imageUrl', 'updatedAt'];
 
 function syncGalleryFromDrive() {
   const sheet = getGallerySheet_();
@@ -43,9 +43,10 @@ function syncGalleryFromDrive() {
       fileId,
       title: current.title || file.getName().replace(/\.[^.]+$/, ''),
       caption: current.caption || '',
+      group_name: current.group_name || 'Gallery',
       order,
-      thumbnailUrl: `https://drive.google.com/thumbnail?id=${fileId}&sz=w1400`,
-      imageUrl: `https://drive.google.com/uc?export=view&id=${fileId}`,
+      thumbnailUrl: `https://lh3.googleusercontent.com/d/${fileId}=w1400`,
+      imageUrl: `https://lh3.googleusercontent.com/d/${fileId}=w2400`,
       updatedAt: new Date().toISOString(),
     });
   }
@@ -120,6 +121,7 @@ The Drive folder or each image must be publicly viewable. In Google Drive, set s
 
 - Upload images into the Drive folder.
 - Run the script manually or wait for the trigger.
+- Type a group name in the `group_name` column, such as `Feast Day 2026` or `Church Building`.
 - Type captions in the `caption` column.
-- The next sync keeps those captions as long as the image file remains in the folder.
+- The next sync keeps those captions and group names as long as the image file remains in the folder.
 - To hide/remove an image from the website, remove it from the Drive folder and run the sync.

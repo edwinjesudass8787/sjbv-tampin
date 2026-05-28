@@ -1,5 +1,6 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import GalleryClient from './GalleryClient';
 import { getGalleryItems } from '../lib/galleryContent';
 
 export const metadata = {
@@ -23,19 +24,7 @@ export default async function GalleryPage() {
       </section>
       <main className="gallery-main">
         {items.length > 0 ? (
-          <div className="gallery-grid">
-            {items.map((item) => (
-              <figure className="gallery-card" key={item.fileId}>
-                <a href={item.imageUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.title}`}>
-                  <img src={item.thumbnailUrl} alt={item.caption || item.title} loading="lazy" />
-                </a>
-                <figcaption>
-                  <h2>{item.title}</h2>
-                  {item.caption && <p>{item.caption}</p>}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <GalleryClient items={items} />
         ) : (
           <div className="gallery-empty">
             <h2>Gallery Coming Soon</h2>

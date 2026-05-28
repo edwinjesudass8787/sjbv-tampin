@@ -10,6 +10,7 @@ export default function Nav({ active }) {
     { href: '/life', label: 'Life of St. John', key: 'life' },
     { href: '/readings', label: 'Readings', key: 'readings' },
     { href: '/news', label: 'News', key: 'news' },
+    { href: '/gallery', label: 'Gallery', key: 'gallery' },
     { href: '/sdg', label: 'SDG', key: 'sdg' },
     { href: '/rosary', label: 'Rosary', key: 'rosary' },
   ];

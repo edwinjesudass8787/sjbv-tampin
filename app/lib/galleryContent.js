@@ -17,11 +17,12 @@ export async function getGalleryItems() {
         fileId: item.fileId,
         title: item.title || 'Parish photo',
         caption: item.caption || '',
+        groupName: item.group_name || 'Gallery',
         order: Number(item.order) || 9999,
-        thumbnailUrl: item.thumbnailUrl || `https://drive.google.com/thumbnail?id=${item.fileId}&sz=w1400`,
-        imageUrl: item.imageUrl || `https://drive.google.com/uc?export=view&id=${item.fileId}`,
+        thumbnailUrl: `https://lh3.googleusercontent.com/d/${item.fileId}=w1400`,
+        imageUrl: `https://lh3.googleusercontent.com/d/${item.fileId}=w2400`,
       }))
-      .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
+      .sort((a, b) => a.groupName.localeCompare(b.groupName) || a.order - b.order || a.title.localeCompare(b.title));
   } catch {
     return [];
   }
