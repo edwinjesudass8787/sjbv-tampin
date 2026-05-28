@@ -361,7 +361,7 @@ a { color: inherit; }
   .rosary-hero { display: none; }
   .rosary-main.rosary-main-companion { padding: 57px 0 0; height: 100vh; box-sizing: border-box; overflow: hidden; }
   .rosary-main-companion .rosary-shell { height: 100%; display: flex; flex-direction: column; max-width: none; margin: 0; }
-  .rosary-progress-top { display: flex; align-items: center; gap: .75rem; padding: .6rem 1rem; background: rgba(10,10,10,.92); border-bottom: 1px solid rgba(197,160,89,.18); }
+  .rosary-progress-top { display: none; }
   .rosary-progress-top .progress-bar { flex: 1; margin: 0; }
   .rosary-progress-top span { color: var(--text-muted); font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
   .rosary-main-companion .mystery-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0; margin: 0; padding: .5rem .75rem; background: rgba(10,10,10,.92); border-bottom: 1px solid rgba(197,160,89,.18); scrollbar-width: none; }
