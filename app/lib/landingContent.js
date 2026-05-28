@@ -17,18 +17,27 @@ const DEFAULT_CONTENT = {
   priestTitle: 'Parish Priest',
   massTitle: 'Holy Mass Schedule',
   massSubtitle: 'Join us in celebration of the Eucharist',
-  mass1Day: 'Sunday',
-  mass1Time: '8:00 AM',
-  mass1Language: 'English',
-  mass1Note: 'Main Sunday Mass',
-  mass2Day: 'Saturday',
-  mass2Time: '6:00 PM',
-  mass2Language: 'English',
-  mass2Note: 'Anticipated Sunday Mass',
-  mass3Day: 'Weekdays',
-  mass3Time: '6:30 PM',
-  mass3Language: 'English',
-  mass3Note: 'Monday - Friday',
+  massSundayTime: '8:00 AM',
+  massSundayLanguage: 'English',
+  massSundayNote: 'Main Sunday Mass',
+  massMondayTime: '6:30 PM',
+  massMondayLanguage: 'English',
+  massMondayNote: 'Weekday Mass',
+  massTuesdayTime: '6:30 PM',
+  massTuesdayLanguage: 'English',
+  massTuesdayNote: 'Weekday Mass',
+  massWednesdayTime: '6:30 PM',
+  massWednesdayLanguage: 'English',
+  massWednesdayNote: 'Weekday Mass',
+  massThursdayTime: '6:30 PM',
+  massThursdayLanguage: 'English',
+  massThursdayNote: 'Weekday Mass',
+  massFridayTime: '6:30 PM',
+  massFridayLanguage: 'English',
+  massFridayNote: 'Weekday Mass',
+  massSaturdayTime: '6:00 PM',
+  massSaturdayLanguage: 'English',
+  massSaturdayNote: 'Anticipated Sunday Mass',
   visitTitle: 'Visit Us',
   visitSubtitle: 'We look forward to welcoming you',
   contactTitle: 'Contact',
@@ -40,7 +49,7 @@ export async function getLandingContent() {
   if (!csvUrl) return DEFAULT_CONTENT;
 
   try {
-    const response = await fetch(csvUrl, { next: { revalidate: 300 } });
+    const response = await fetch(csvUrl, { cache: 'no-store' });
     if (!response.ok) return DEFAULT_CONTENT;
 
     const rows = parseCsv(await response.text());
@@ -49,7 +58,7 @@ export async function getLandingContent() {
     rows.slice(1).forEach((row) => {
       const key = row[0]?.trim();
       const value = row[1]?.trim();
-      if (key && value) content[key] = value;
+      if (key && (value || key.startsWith('mass'))) content[key] = value || '';
     });
 
     return content;

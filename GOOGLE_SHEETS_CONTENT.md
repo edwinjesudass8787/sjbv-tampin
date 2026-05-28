@@ -51,18 +51,27 @@ priestName,"Rev. Fr. Albet Arockiasamy"
 priestTitle,"Parish Priest"
 massTitle,"Holy Mass Schedule"
 massSubtitle,"Join us in celebration of the Eucharist"
-mass1Day,"Sunday"
-mass1Time,"8:00 AM"
-mass1Language,"English"
-mass1Note,"Main Sunday Mass"
-mass2Day,"Saturday"
-mass2Time,"6:00 PM"
-mass2Language,"English"
-mass2Note,"Anticipated Sunday Mass"
-mass3Day,"Weekdays"
-mass3Time,"6:30 PM"
-mass3Language,"English"
-mass3Note,"Monday - Friday"
+massSundayTime,"8:00 AM"
+massSundayLanguage,"English"
+massSundayNote,"Main Sunday Mass"
+massMondayTime,"6:30 PM"
+massMondayLanguage,"English"
+massMondayNote,"Weekday Mass"
+massTuesdayTime,"6:30 PM"
+massTuesdayLanguage,"English"
+massTuesdayNote,"Weekday Mass"
+massWednesdayTime,"6:30 PM"
+massWednesdayLanguage,"English"
+massWednesdayNote,"Weekday Mass"
+massThursdayTime,"6:30 PM"
+massThursdayLanguage,"English"
+massThursdayNote,"Weekday Mass"
+massFridayTime,"6:30 PM"
+massFridayLanguage,"English"
+massFridayNote,"Weekday Mass"
+massSaturdayTime,"6:00 PM"
+massSaturdayLanguage,"English"
+massSaturdayNote,"Anticipated Sunday Mass"
 visitTitle,"Visit Us"
 visitSubtitle,"We look forward to welcoming you"
 contactTitle,"Contact"
@@ -74,7 +83,8 @@ Mon - Fri, 9:00 AM - 4:00 PM"
 
 ## Notes
 
-- Updates are refreshed by the site every 5 minutes.
+- Updates are refreshed when the landing page is reloaded.
 - If the sheet URL is missing or unavailable, the site uses the built-in fallback content.
-- Leave a value blank to keep the built-in fallback for that key.
+- Leave all mass fields for a day blank if you do not want that day to appear as a card.
+- Leave any non-mass value blank to keep the built-in fallback for that key.
 - For multi-line text, press `Option + Enter` on Mac inside a Google Sheets cell.

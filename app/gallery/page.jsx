@@ -1,11 +1,16 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { getGalleryItems } from '../lib/galleryContent';
 
 export const metadata = {
   title: 'Gallery | Church of St. John Marie Vianney, Tampin',
 };
 
-export default function GalleryPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function GalleryPage() {
+  const items = await getGalleryItems();
+
   return (
     <>
       <Nav active="gallery" />
@@ -17,32 +22,26 @@ export default function GalleryPage() {
         </div>
       </section>
       <main className="gallery-main">
-        <div className="gallery-embed-shell">
-          <div className="gallery-facebook">
-            <iframe
-              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeople%2FChurch-of-St-John-Marie-VianneyTampin%2F100084148242641%2F&tabs=timeline&width=500&height=800&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-              width="500"
-              height="800"
-              style={{ border: 'none', overflow: 'hidden' }}
-              scrolling="no"
-              frameBorder="0"
-              allowFullScreen={true}
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              title="Church of St John Marie Vianney Facebook"
-            />
+        {items.length > 0 ? (
+          <div className="gallery-grid">
+            {items.map((item) => (
+              <figure className="gallery-card" key={item.fileId}>
+                <a href={item.imageUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.title}`}>
+                  <img src={item.thumbnailUrl} alt={item.caption || item.title} loading="lazy" />
+                </a>
+                <figcaption>
+                  <h2>{item.title}</h2>
+                  {item.caption && <p>{item.caption}</p>}
+                </figcaption>
+              </figure>
+            ))}
           </div>
-          <div className="gallery-fallback">
-            <p>If the Facebook feed doesn't load, you can also visit our page directly:</p>
-            <a
-              className="outline-button"
-              href="https://www.facebook.com/people/Church-of-St-John-Marie-VianneyTampin/100084148242641/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Facebook Page
-            </a>
+        ) : (
+          <div className="gallery-empty">
+            <h2>Gallery Coming Soon</h2>
+            <p>Add public Google Drive images to the gallery sheet to display them here.</p>
           </div>
-        </div>
+        )}
       </main>
       <Footer />
     </>

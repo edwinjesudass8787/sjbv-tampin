@@ -2,16 +2,18 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import { getLandingContent } from './lib/landingContent';
 
+const massDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 export default async function HomePage() {
   const content = await getLandingContent();
-  const masses = [1, 2, 3]
-    .map((number) => ({
-      day: content[`mass${number}Day`],
-      time: content[`mass${number}Time`],
-      language: content[`mass${number}Language`],
-      note: content[`mass${number}Note`],
+  const masses = massDays
+    .map((day) => ({
+      day,
+      time: content[`mass${day}Time`],
+      language: content[`mass${day}Language`],
+      note: content[`mass${day}Note`],
     }))
-    .filter((mass) => mass.day || mass.time || mass.note);
+    .filter((mass) => mass.time);
 
   return (
     <>
