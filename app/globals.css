@@ -174,6 +174,7 @@ a { color: inherit; }
 
 .rosary-main { padding: 4rem 5% 6rem; background: radial-gradient(circle at 50% 0%, rgba(197,160,89,.1), transparent 30%), var(--black); }
 .rosary-shell { max-width: 1180px; margin: 0 auto; }
+.rosary-progress-top { display: none; }
 .mystery-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
 .mystery-tabs button { padding: 1.1rem; border: 1px solid rgba(197,160,89,.24); background: rgba(26,26,26,.78); color: var(--white); text-align: left; cursor: pointer; transition: all .25s ease; }
 .mystery-tabs button:hover, .mystery-tabs button.active { border-color: var(--gold); background: rgba(197,160,89,.12); transform: translateY(-2px); }
@@ -193,6 +194,7 @@ a { color: inherit; }
 .progress-bar { height: 8px; margin-top: .6rem; background: rgba(255,255,255,.09); border-radius: 999px; overflow: hidden; }
 .progress-bar div { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: inherit; transition: width .25s ease; }
 .prayer-panel { padding: clamp(1.5rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: center; }
+.prayer-panel-scroll { overflow-y: auto; }
 .prayer-panel .eyebrow { color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-size: .8rem; margin-bottom: 1rem; }
 .prayer-panel h2 { font-family: 'EthicSerif-Light', serif; color: var(--white); font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.1; margin-bottom: .8rem; }
 .prayer-panel h3 { font-family: 'EthicSerif-Light', serif; color: var(--gold); font-size: 1.35rem; font-style: italic; margin-bottom: .5rem; }
@@ -202,6 +204,7 @@ a { color: inherit; }
 .rosary-controls button { padding: .85rem 1.2rem; border: 1px solid var(--gold); background: transparent; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; font-size: .78rem; cursor: pointer; transition: all .25s ease; }
 .rosary-controls button:hover:not(:disabled) { background: var(--gold); color: var(--black); }
 .rosary-controls button:disabled { opacity: .35; cursor: not-allowed; }
+.rosary-companion { display: none; }
 
 .site-footer { background: var(--black); border-top: 1px solid rgba(197,160,89,.2); padding: 3rem 5%; text-align: center; color: var(--text-muted); }
 .footer-logo { width: 80px; height: 80px; margin-bottom: 1.5rem; opacity: .75; border-radius: 50%; }
@@ -354,6 +357,37 @@ a { color: inherit; }
   .priest-content { text-align: center; }
 }
 
+@media (max-width: 768px) {
+  .rosary-hero { display: none; }
+  .rosary-main.rosary-main-companion { padding: 0; height: calc(100vh - 57px); overflow: hidden; }
+  .rosary-main-companion .rosary-shell { height: 100%; display: flex; flex-direction: column; max-width: none; margin: 0; }
+  .rosary-progress-top { display: flex; align-items: center; gap: .75rem; padding: .6rem 1rem; background: rgba(10,10,10,.92); border-bottom: 1px solid rgba(197,160,89,.18); }
+  .rosary-progress-top .progress-bar { flex: 1; margin: 0; }
+  .rosary-progress-top span { color: var(--text-muted); font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+  .rosary-main-companion .mystery-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0; margin: 0; padding: .5rem .75rem; background: rgba(10,10,10,.92); border-bottom: 1px solid rgba(197,160,89,.18); scrollbar-width: none; }
+  .rosary-main-companion .mystery-tabs::-webkit-scrollbar { display: none; }
+  .rosary-main-companion .mystery-tabs button { flex: 0 0 auto; padding: .55rem .9rem; border: 0; border-right: 1px solid rgba(197,160,89,.12); background: transparent; text-align: center; }
+  .rosary-main-companion .mystery-tabs button:last-child { border-right: 0; }
+  .rosary-main-companion .mystery-tabs button.active { background: rgba(197,160,89,.15); border-color: rgba(197,160,89,.12); }
+  .rosary-main-companion .mystery-tabs span { font-size: .82rem; margin-bottom: .15rem; }
+  .rosary-main-companion .mystery-tabs small { font-size: .65rem; }
+  .rosary-grid { display: none; }
+  .rosary-companion { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 0; }
+  .companion-header { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .7rem 1rem; background: rgba(18,18,18,.95); border-bottom: 1px solid rgba(197,160,89,.15); }
+  .companion-mystery { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: .9rem; letter-spacing: 1px; }
+  .companion-decade { color: var(--text-muted); font-size: .78rem; font-style: italic; }
+  .companion-title { font-family: 'EthicSerif-Light', serif; color: var(--white); font-size: clamp(1.6rem, 7vw, 2.2rem); line-height: 1.15; padding: .9rem 1rem .4rem; margin: 0; }
+  .companion-bead { color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; font-size: .72rem; padding: 0 1rem .6rem; margin: 0; }
+  .companion-text { flex: 1; min-height: 0; overflow-y: auto; padding: 0 1rem 1rem; }
+  .companion-text p { color: var(--text-light); font-size: clamp(1.05rem, 4.2vw, 1.25rem); line-height: 1.75; margin: 0; }
+  .companion-controls { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; padding: .6rem 1rem 1rem; background: rgba(10,10,10,.92); border-top: 1px solid rgba(197,160,89,.18); }
+  .companion-controls button { display: flex; align-items: center; justify-content: center; gap: .4rem; padding: 1rem; border: 1px solid var(--gold); background: transparent; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-size: .85rem; cursor: pointer; transition: all .25s ease; }
+  .companion-controls button:hover:not(:disabled) { background: var(--gold); color: var(--black); }
+  .companion-controls button:disabled { opacity: .35; cursor: not-allowed; }
+  .companion-controls button svg { width: 18px; height: 18px; }
+  .companion-next { background: var(--gold) !important; color: var(--black) !important; }
+  .companion-next:hover:not(:disabled) { background: var(--gold-light) !important; }
+
 @media (max-width: 480px) {
   .nav-logo { padding-left: 64px; }
   .nav-logo span { display: none; }
@@ -371,4 +405,7 @@ a { color: inherit; }
   .rosary-loop { width: min(82vw, 300px); }
   .rosary-visual { gap: 1rem; }
   .progress-card { font-size: .9rem; }
+  .companion-title { font-size: clamp(1.4rem, 6vw, 1.8rem); }
+  .companion-text p { font-size: 1rem; line-height: 1.7; }
+  .companion-controls button { padding: .85rem; font-size: .78rem; }
 }

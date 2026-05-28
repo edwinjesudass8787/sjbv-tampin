@@ -17,7 +17,7 @@ export default function RosaryPage() {
           <p>A guided rosary for personal prayer, reflection, and devotion wherever you are.</p>
         </div>
       </section>
-      <main className="rosary-main">
+      <main className="rosary-main rosary-main-companion">
         <RosaryClient />
       </main>
       <Footer />
