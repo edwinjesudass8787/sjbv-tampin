@@ -65,19 +65,35 @@ export default function SDGWheel() {
       </article>
 
       <div className="sdg-mobile-list">
-        {sdgs.map((sdg) => (
-          <button
-            className={`sdg-mobile-item ${selected.num === sdg.num ? 'active' : ''}`}
-            key={sdg.num}
-            onClick={() => setSelected(sdg)}
-            style={{ '--sdg-color': sdg.color }}
-            type="button"
-          >
-            <span>{String(sdg.num).padStart(2, '0')}</span>
-            <GoalIcon name={sdg.icon} />
-            <strong>{sdg.title}</strong>
-          </button>
-        ))}
+        {sdgs.map((sdg) => {
+          const isActive = selected.num === sdg.num;
+          return (
+            <div key={sdg.num} className="sdg-mobile-wrapper">
+              <button
+                className={`sdg-mobile-item ${isActive ? 'active' : ''}`}
+                onClick={() => setSelected(isActive ? sdgs[0] : sdg)}
+                style={{ '--sdg-color': sdg.color }}
+                type="button"
+              >
+                <span>{String(sdg.num).padStart(2, '0')}</span>
+                <GoalIcon name={sdg.icon} />
+                <strong>{sdg.title}</strong>
+              </button>
+              {isActive && (
+                <article className="sdg-mobile-detail" style={{ '--sdg-color': sdg.color }}>
+                  <div className="sdg-detail-number">Goal {String(sdg.num).padStart(2, '0')}</div>
+                  <h2>{sdg.title}</h2>
+                  <span>{sdg.catholic}</span>
+                  <p>{sdg.desc}</p>
+                  <div className="sdg-action">
+                    <h3>What can you do?</h3>
+                    <p>{sdg.whatCanYouDo}</p>
+                  </div>
+                </article>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
