@@ -168,8 +168,19 @@ export default function RosaryClient() {
           <span className="companion-mystery">{selectedMystery.label}</span>
           {currentBead.mystery && <span className="companion-decade">{currentBead.mystery}</span>}
         </div>
+        <div className="companion-beads">
+          {beads.map((bead, index) => (
+            <button
+              key={`mb-${index}`}
+              type="button"
+              className={`companion-bead ${bead.type} ${index === current ? 'current' : ''} ${index < current ? 'complete' : ''}`}
+              onClick={() => setCurrent(index)}
+              aria-label={`${bead.section}: ${bead.label}`}
+            />
+          ))}
+        </div>
         <h2 className="companion-title">{currentBead.prayer.title}</h2>
-        <p className="companion-bead">{currentBead.label} — {currentBead.section}</p>
+        <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
         <div className="companion-text">
           <p>{currentBead.prayer.text}</p>
         </div>
