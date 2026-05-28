@@ -1,5 +1,6 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SocialBoardClient from './SocialBoardClient';
 import { getSocialBoardPosts } from '../lib/socialBoardContent';
 
 export const metadata = {
@@ -40,26 +41,7 @@ export default async function SocialBoardPage() {
         </div>
 
         {posts.length > 0 ? (
-          <section className="social-board" aria-label="Submitted community posts">
-            {posts.map((post) => (
-              <article className="social-card" key={post.id}>
-                <header className="social-card-header">
-                  {post.avatarUrl ? (
-                    <img src={post.avatarUrl} alt="" className="social-avatar" />
-                  ) : (
-                    <div className="social-avatar social-avatar-fallback">{post.name.charAt(0)}</div>
-                  )}
-                  <div>
-                    <h2>{post.name}</h2>
-                    {post.location ? <span>{post.location}</span> : null}
-                  </div>
-                </header>
-                {post.message ? <p className="social-message">{post.message}</p> : null}
-                {post.imageUrl ? <img src={post.imageUrl} alt={`Submitted by ${post.name}`} className="social-photo" /> : null}
-                {post.submittedAt ? <time>{post.submittedAt}</time> : null}
-              </article>
-            ))}
-          </section>
+          <SocialBoardClient posts={posts} />
         ) : (
           <div className="social-empty">
             <h2>Social Board Coming Soon</h2>
