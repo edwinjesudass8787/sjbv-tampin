@@ -24,6 +24,7 @@ export async function getMinistries() {
     const grouped = new Map();
 
     records.forEach((record) => {
+      const section = record.group || record.section_group || record.ministry_group || '';
       const category = record.category || record.section || record.ministry_category || '';
       const ministry = record.ministry || record.name || record.ministry_name || '';
       const picName = record.pic_name || record.person_in_charge || record.contact_name || '';
@@ -31,9 +32,10 @@ export async function getMinistries() {
       const order = Number(record.order) || 9999;
 
       if (!category) return;
-      if (!grouped.has(category)) grouped.set(category, { category, ministries: [], picName: '', picImageUrl: '', order });
+      if (!grouped.has(category)) grouped.set(category, { category, section, ministries: [], picName: '', picImageUrl: '', order });
 
       const group = grouped.get(category);
+      if (section) group.section = section;
       if (ministry) {
         group.ministries.push({ name: ministry, picName, picImageUrl, order });
       } else if (picName || picImageUrl) {
@@ -46,6 +48,7 @@ export async function getMinistries() {
       .sort((a, b) => a.order - b.order || a.category.localeCompare(b.category))
       .map((group) => ({
         category: group.category,
+        section: group.section,
         picName: group.picName,
         picImageUrl: group.picImageUrl,
         ministries: group.ministries

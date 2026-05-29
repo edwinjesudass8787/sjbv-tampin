@@ -94,7 +94,7 @@ function groupBySection(ministries) {
   const sections = new Map(sectionOrder.map((section) => [section, { name: section, groups: [] }]));
 
   ministries.forEach((group) => {
-    const sectionName = categorySections[group.category.toUpperCase()] || 'Community & Outreach';
+    const sectionName = group.section || categorySections[group.category.toUpperCase()] || 'Community & Outreach';
     if (!sections.has(sectionName)) sections.set(sectionName, { name: sectionName, groups: [] });
     sections.get(sectionName).groups.push(group);
   });
