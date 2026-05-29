@@ -288,17 +288,6 @@ export default function RosaryClient() {
           <span className="companion-mystery">{selectedMystery.label}</span>
           {currentBead.mystery && <span className="companion-decade">{currentBead.mystery.title}</span>}
         </div>
-        <h2 className="companion-title">{currentBead.prayer.title}</h2>
-        <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
-        <div className="companion-text">
-          {currentBead.mystery && (
-            <div className="companion-reflection">
-              <p>{currentBead.mystery.description}</p>
-              <span>Fruit: {currentBead.mystery.fruit}</span>
-            </div>
-          )}
-          <p>{currentBead.prayer.text}</p>
-        </div>
         <div className="companion-beads" ref={beadStripRef}>
           {beads.map((bead, index) => (
             <button
@@ -323,6 +312,17 @@ export default function RosaryClient() {
             Next
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
+        </div>
+        <h2 className="companion-title">{currentBead.prayer.title}</h2>
+        <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
+        <div className="companion-text">
+          {currentBead.mystery && (
+            <div className="companion-reflection">
+              <p>{currentBead.mystery.description}</p>
+              <span>Fruit: {currentBead.mystery.fruit}</span>
+            </div>
+          )}
+          <p>{currentBead.prayer.text}</p>
         </div>
       </div>
     </div>
