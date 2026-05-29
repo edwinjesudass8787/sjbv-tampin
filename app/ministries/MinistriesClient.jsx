@@ -55,11 +55,10 @@ export default function MinistriesClient({ ministries }) {
                       </ul>
                     ) : group.picName || group.picImageUrl ? (
                       <div className="ministry-card-empty">
-                        <p>Details coming soon.</p>
                         <PicBlock picName={group.picName} picImageUrl={group.picImageUrl} />
                       </div>
                     ) : (
-                      <p>Details coming soon.</p>
+                      null
                     )
                   ) : null}
                 </article>
