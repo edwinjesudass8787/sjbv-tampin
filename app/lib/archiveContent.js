@@ -16,16 +16,22 @@ export async function getArchiveItems() {
       .filter((item) => getImageSource(item))
       .map((item) => ({
         date: item.date || item.timestamp || '',
+        year: normalizeYear(item.year),
         title: item.title || 'Archive item',
         description: item.description || item.caption || '',
         category: item.category || 'General',
         imageUrl: toDirectImageUrl(getImageSource(item)),
         order: Number(item.order) || 9999,
       }))
-      .sort((a, b) => a.order - b.order || b.date.localeCompare(a.date));
+      .sort((a, b) => a.order - b.order || a.year - b.year || a.title.localeCompare(b.title));
   } catch {
     return [];
   }
+}
+
+function normalizeYear(value) {
+  const year = Number.parseInt(value, 10);
+  return Number.isFinite(year) ? year : 0;
 }
 
 function normalizeHeader(header) {

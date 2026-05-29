@@ -411,6 +411,11 @@ a { color: inherit; }
 
 .archive-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.22), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
 .archive-main { padding: 4rem 5% 6rem; background: var(--black); }
+.archive-filters { max-width: 1280px; margin: 0 auto 1.6rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1.4rem; flex-wrap: wrap; padding: 1.1rem 1.2rem; border: 1px solid rgba(197,160,89,.22); background: rgba(26,26,26,.72); }
+.archive-filters span { display: block; margin-bottom: .6rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; font-size: .72rem; }
+.archive-filter-buttons { display: flex; flex-wrap: wrap; gap: .55rem; }
+.archive-filter-buttons button { padding: .62rem .85rem; border: 1px solid rgba(197,160,89,.3); background: transparent; color: var(--gold); letter-spacing: 1.2px; text-transform: uppercase; font-size: .72rem; cursor: pointer; transition: all .25s ease; }
+.archive-filter-buttons button:hover, .archive-filter-buttons button.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
 .archive-grid { max-width: 1280px; margin: 0 auto; column-count: 3; column-gap: 1.4rem; }
 .archive-card { display: inline-flex; width: 100%; flex-direction: column; margin: 0 0 1.4rem; break-inside: avoid; overflow: hidden; border: 1px solid rgba(197,160,89,.22); background: linear-gradient(135deg, rgba(26,26,26,.96), rgba(12,12,12,.98)); box-shadow: 0 18px 44px rgba(0,0,0,.3); }
 .archive-card button { display: block; width: 100%; overflow: hidden; border: 0; background: transparent; cursor: zoom-in; }

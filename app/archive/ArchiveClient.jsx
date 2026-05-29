@@ -1,9 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function ArchiveClient({ items }) {
   const [selected, setSelected] = useState(null);
+  const [selectedYear, setSelectedYear] = useState('all');
+  const [sortDirection, setSortDirection] = useState('asc');
+
+  const years = useMemo(() => {
+    return [...new Set(items.map((item) => item.year).filter(Boolean))].sort((a, b) => a - b);
+  }, [items]);
+
+  const filteredItems = useMemo(() => {
+    return [...items]
+      .filter((item) => selectedYear === 'all' || item.year === Number(selectedYear))
+      .sort((a, b) => {
+        const yearA = a.year || 0;
+        const yearB = b.year || 0;
+        const yearSort = sortDirection === 'asc' ? yearA - yearB : yearB - yearA;
+        return yearSort || a.title.localeCompare(b.title);
+      });
+  }, [items, selectedYear, sortDirection]);
 
   useEffect(() => {
     if (!selected) return undefined;
@@ -32,14 +49,41 @@ export default function ArchiveClient({ items }) {
 
   return (
     <>
+      <div className="archive-filters" aria-label="Archive filters">
+        <div>
+          <span>Filter by Year</span>
+          <div className="archive-filter-buttons">
+            <button type="button" className={selectedYear === 'all' ? 'active' : ''} onClick={() => setSelectedYear('all')}>
+              All
+            </button>
+            {years.map((year) => (
+              <button type="button" className={selectedYear === String(year) ? 'active' : ''} key={year} onClick={() => setSelectedYear(String(year))}>
+                {year}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <span>Sort</span>
+          <div className="archive-filter-buttons">
+            <button type="button" className={sortDirection === 'asc' ? 'active' : ''} onClick={() => setSortDirection('asc')}>
+              Oldest First
+            </button>
+            <button type="button" className={sortDirection === 'desc' ? 'active' : ''} onClick={() => setSortDirection('desc')}>
+              Newest First
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="archive-grid">
-        {items.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <figure className="archive-card" key={`${item.title}-${index}`}>
             <button type="button" onClick={() => setSelected(item)} aria-label={`Open ${item.title}`}>
               <img src={item.imageUrl} alt={item.title} loading="lazy" />
             </button>
             <figcaption>
-              <span className="archive-card-category">{item.category}</span>
+              <span className="archive-card-category">{item.year || item.category}</span>
               <h2>{item.title}</h2>
               {item.date && <time>{item.date}</time>}
               {item.description && <p>{item.description}</p>}
@@ -57,6 +101,7 @@ export default function ArchiveClient({ items }) {
             <img src={selected.imageUrl} alt={selected.title} />
             <div className="gallery-modal-caption">
               <h2>{selected.title}</h2>
+              {selected.year ? <span className="archive-card-category">{selected.year}</span> : null}
               {selected.date && <time>{selected.date}</time>}
               {selected.description && <p>{selected.description}</p>}
             </div>
