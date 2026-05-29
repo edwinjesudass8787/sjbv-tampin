@@ -9,6 +9,7 @@ export default function Nav({ active }) {
     { href: '/', label: 'Home', key: 'home' },
     { href: '/life', label: 'Life of St. John', key: 'life' },
     { href: '/readings', label: 'Readings', key: 'readings' },
+    { href: '/announcements', label: 'Announcements', key: 'announcements' },
     { href: '/news', label: 'News', key: 'news' },
     { href: '/gallery', label: 'Gallery', key: 'gallery' },
     { href: '/social-board', label: 'Social Board', key: 'social-board' },

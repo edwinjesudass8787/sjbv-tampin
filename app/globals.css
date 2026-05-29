@@ -275,6 +275,20 @@ a { color: inherit; }
 .gallery-empty h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; margin-bottom: .8rem; }
 .gallery-empty p { color: var(--text-muted); }
 
+.announcements-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.24), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
+.announcements-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 50% 50%, rgba(197,160,89,.14) 0 1px, transparent 2px); background-size: 48px 48px; opacity: .35; }
+.announcements-main { padding: 4rem 5% 6rem; background: radial-gradient(circle at 50% 0%, rgba(197,160,89,.09), transparent 28%), var(--black); }
+.announcements-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.announcement-card { overflow: hidden; border: 1px solid rgba(197,160,89,.24); background: linear-gradient(145deg, rgba(26,26,26,.96), rgba(12,12,12,.98)); box-shadow: 0 18px 44px rgba(0,0,0,.3); transition: transform .25s ease, box-shadow .25s ease; }
+.announcement-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(0,0,0,.4); }
+.announcement-card img { width: 100%; aspect-ratio: 16 / 10; display: block; object-fit: cover; background: rgba(255,255,255,.04); }
+.announcement-card-body { padding: 1.35rem; }
+.announcement-card time { display: block; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-size: .75rem; margin-bottom: .7rem; }
+.announcement-card p { color: var(--text-light); font-size: 1.04rem; line-height: 1.7; white-space: pre-line; }
+.announcements-empty { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; border: 1px solid rgba(197,160,89,.24); background: rgba(26,26,26,.72); }
+.announcements-empty h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; margin-bottom: .8rem; }
+.announcements-empty p { color: var(--text-muted); }
+
 .social-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.24), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
 .social-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, transparent 49%, rgba(197,160,89,.08) 50%, transparent 51%), radial-gradient(circle at 50% 50%, transparent 0 38%, rgba(197,160,89,.1) 39%, transparent 40%); background-size: 90px 90px, 240px 240px; opacity: .38; }
 .social-main { padding: 4rem 5% 6rem; background: #1b2534; }
@@ -396,8 +410,8 @@ a { color: inherit; }
   .quote { padding: 1.25rem; font-size: 1.15rem; }
   .mass-cards, .contact-grid { grid-template-columns: 1fr; }
   .contact-item { padding: 1.25rem; }
-  .life-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
-  .life-main, .readings-main, .rosary-main, .news-main, .social-main, .sdg-main, .vianney-map-main { padding: 3rem 1.25rem 4rem; }
+  .life-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .announcements-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
+  .life-main, .readings-main, .rosary-main, .news-main, .announcements-main, .social-main, .sdg-main, .vianney-map-main { padding: 3rem 1.25rem 4rem; }
   .social-board { column-count: 3; }
   .vianney-map-shell { grid-template-columns: 1fr; }
   .vianney-globe-stage { min-height: 560px; }
@@ -503,6 +517,7 @@ a { color: inherit; }
   .reading-meta, .reading-content { padding: 1rem; }
   .news-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }
+  .announcements-grid { grid-template-columns: 1fr; }
   .social-board { column-count: 1; }
   .archive-grid { grid-template-columns: 1fr; }
   .news-source { align-items: flex-start; flex-direction: column; }
