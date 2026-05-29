@@ -3,6 +3,11 @@
 import { useState } from 'react';
 
 const categorySections = {
+  'PARISH PASTORAL COORDINATOR': 'Parish Leadership',
+  'PARISH COORDINATING COMMITTEE': 'Parish Leadership',
+  'PARISH FINANCE COMMITTEE': 'Parish Leadership',
+  'LITURGICAL COMMITTEE': 'Parish Leadership',
+  'PARISH PROJECT COMMITTEE': 'Parish Leadership',
   CATECHETICS: 'Formation & Apostolates',
   'LANGUAGE APOSTOLATES': 'Formation & Apostolates',
   LITURGY: 'Worship & Service',
@@ -14,7 +19,7 @@ const categorySections = {
   CEMETERY: 'Worship & Service',
 };
 
-const sectionOrder = ['Formation & Apostolates', 'Worship & Service', 'Community & Outreach'];
+const sectionOrder = ['Parish Leadership', 'Formation & Apostolates', 'Worship & Service', 'Community & Outreach'];
 
 export default function MinistriesClient({ ministries }) {
   const [openCategory, setOpenCategory] = useState(ministries[0]?.category || '');
