@@ -8,6 +8,7 @@ export default function Nav({ active }) {
   const mainLinks = [
     { href: '/', label: 'Home', key: 'home' },
     { href: '/announcements', label: 'Announcements', key: 'announcements' },
+    { href: '/ministries', label: 'Ministries', key: 'ministries' },
     { href: '/news', label: 'News', key: 'news' },
     { href: '/gallery', label: 'Gallery', key: 'gallery' },
     { href: '/social-board', label: 'Social Board', key: 'social-board' },
