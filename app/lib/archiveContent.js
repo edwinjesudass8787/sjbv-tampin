@@ -1,30 +1,39 @@
+const defaultCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8u0d3eAj0ZGQD7rJgnjMvQmWNqF6FnKf902ZSLQuhs6kPQMhFXyHmJOt7LJe0g80m2CNSD-b47uJA/pub?gid=825165765&single=true&output=csv';
+
 export async function getArchiveItems() {
-  const csvUrl = process.env.ARCHIVE_CSV_URL;
-  if (!csvUrl) return [];
+  const csvUrl = process.env.ARCHIVE_CSV_URL || defaultCsvUrl;
 
   try {
     const response = await fetch(csvUrl, { cache: 'no-store' });
     if (!response.ok) return [];
 
     const rows = parseCsv(await response.text());
-    const headers = rows[0]?.map((header) => header.trim()) || [];
+    const headers = rows[0]?.map((header) => normalizeHeader(header)) || [];
 
     return rows
       .slice(1)
       .map((row) => toRecord(headers, row))
-      .filter((item) => item.imageUrl)
+      .filter((item) => getImageSource(item))
       .map((item) => ({
-        date: item.date || '',
+        date: item.date || item.timestamp || '',
         title: item.title || 'Archive item',
-        description: item.description || '',
+        description: item.description || item.caption || '',
         category: item.category || 'General',
-        imageUrl: toDirectImageUrl(item.imageUrl),
+        imageUrl: toDirectImageUrl(getImageSource(item)),
         order: Number(item.order) || 9999,
       }))
       .sort((a, b) => a.order - b.order || b.date.localeCompare(a.date));
   } catch {
     return [];
   }
+}
+
+function normalizeHeader(header) {
+  return header.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+}
+
+function getImageSource(item) {
+  return item.image || item.image_url || item.imageurl || item.photo || item.picture || '';
 }
 
 function toRecord(headers, row) {
@@ -71,13 +80,19 @@ function parseCsv(csv) {
   return rows;
 }
 
-function toDirectImageUrl(url) {
+function toDirectImageUrl(url = '') {
   if (!url) return url;
-  // Convert Google Drive viewer URLs to direct image URLs
-  const driveMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  if (driveMatch) {
-    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}=w1600`;
+  const patterns = [
+    /drive\.google\.com\/file\/d\/([^/]+)/,
+    /drive\.google\.com\/open\?id=([^&]+)/,
+    /drive\.google\.com\/uc\?[^\s]*id=([^&]+)/,
+    /^[a-zA-Z0-9_-]{20,}$/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return `https://lh3.googleusercontent.com/d/${match[1] || match[0]}=w1600`;
   }
-  // Already a direct URL
+
   return url;
 }
