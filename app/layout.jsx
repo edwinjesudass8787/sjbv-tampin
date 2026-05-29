@@ -1,4 +1,5 @@
 import './globals.css';
+import AnnouncementTicker from './components/AnnouncementTicker';
 
 export const metadata = {
   title: 'Church of St. John Marie Vianney, Tampin',
@@ -8,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <AnnouncementTicker />
+      </body>
     </html>
   );
 }
