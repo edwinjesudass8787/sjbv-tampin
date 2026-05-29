@@ -31,23 +31,9 @@
   --text-muted: #a0a0a0;
 }
 
-:root[data-theme='light'] {
-  --gold: #9f7a2f;
-  --gold-light: #b89042;
-  --brown: #8a653e;
-  --paper: #fffaf0;
-  --navy: #17223a;
-  --white: #171717;
-  --black: #fbf7ef;
-  --dark-gray: #f1eadf;
-  --text-light: #1f2430;
-  --text-muted: #667085;
-}
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'EthicSerif-Light', 'Lato', serif; background-color: var(--black); background-image: radial-gradient(ellipse at 50% 0%, rgba(197,160,89,.06) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(197,160,89,.025) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(197,160,89,.025) 0%, transparent 40%), repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(197,160,89,.015) 41px, transparent 42px); color: var(--text-light); color-scheme: dark; line-height: 1.7; overflow-x: hidden; padding-bottom: 46px; }
-:root[data-theme='light'] body { color-scheme: light; background-image: radial-gradient(ellipse at 50% 0%, rgba(159,122,47,.1) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(159,122,47,.045) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(159,122,47,.045) 0%, transparent 40%), repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(159,122,47,.025) 41px, transparent 42px); }
 a { color: inherit; }
 
 .nav-stack { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--black); box-shadow: 0 2px 20px rgba(0,0,0,.45); }
@@ -63,8 +49,6 @@ a { color: inherit; }
 .secondary-nav a:hover, .secondary-nav a.active { color: var(--gold); background: rgba(197,160,89,.09); }
 .nav-facebook-desktop { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--gold); border: 1px solid rgba(197,160,89,.3); border-radius: 50%; transition: all .3s ease; }
 .nav-facebook-desktop:hover { background: rgba(197,160,89,.12); color: var(--gold-light); }
-.theme-toggle { min-width: 70px; height: 40px; margin-left: 1rem; padding: 0 .85rem; border: 1px solid rgba(197,160,89,.34); border-radius: 999px; background: rgba(197,160,89,.08); color: var(--gold); font-family: 'EthicSerif-Light', serif; letter-spacing: 1.5px; text-transform: uppercase; font-size: .72rem; cursor: pointer; transition: all .25s ease; }
-.theme-toggle:hover { background: var(--gold); color: var(--black); }
 .nav-social { display: none; }
 .nav-social a { display: flex; align-items: center; gap: .5rem; color: var(--gold); text-decoration: none; font-family: 'EthicSerif-Light', serif; }
 .mobile-menu-button { display: none; width: 44px; height: 44px; border: 1px solid rgba(197,160,89,.3); background: transparent; border-radius: 999px; cursor: pointer; }
@@ -76,61 +60,6 @@ a { color: inherit; }
 .announcement-ticker-track span { color: var(--text-light); white-space: nowrap; font-size: .95rem; }
 .announcement-ticker-track span::after { content: '✦'; color: var(--gold); margin-left: 2.5rem; }
 .announcement-ticker:hover .announcement-ticker-track { animation-play-state: paused; }
-
-:root[data-theme='light'] .nav-stack,
-:root[data-theme='light'] .site-nav,
-:root[data-theme='light'] .secondary-nav,
-:root[data-theme='light'] .announcement-ticker,
-:root[data-theme='light'] .site-footer { background: rgba(251,247,239,.96); }
-:root[data-theme='light'] .secondary-nav a { color: #667085; }
-:root[data-theme='light'] .home-hero .hero-content h1,
-:root[data-theme='light'] .home-hero .hero-content p,
-:root[data-theme='light'] .home-hero .location,
-:root[data-theme='light'] .readings-hero .hero-content h1,
-:root[data-theme='light'] .rosary-hero .hero-content h1,
-:root[data-theme='light'] .news-hero .hero-content h1,
-:root[data-theme='light'] .gallery-hero .hero-content h1,
-:root[data-theme='light'] .announcements-hero .hero-content h1,
-:root[data-theme='light'] .social-hero .hero-content h1,
-:root[data-theme='light'] .sdg-hero .hero-content h1,
-:root[data-theme='light'] .vianney-map-hero h1 { color: #fff; }
-:root[data-theme='light'] .about,
-:root[data-theme='light'] .contact,
-:root[data-theme='light'] .priest-message,
-:root[data-theme='light'] .gallery-main,
-:root[data-theme='light'] .archive-main,
-:root[data-theme='light'] .announcements-main,
-:root[data-theme='light'] .news-main,
-:root[data-theme='light'] .readings-main,
-:root[data-theme='light'] .rosary-main,
-:root[data-theme='light'] .sdg-main,
-:root[data-theme='light'] .vianney-map-main { background-color: var(--black); }
-:root[data-theme='light'] .mass-card,
-:root[data-theme='light'] .contact-item,
-:root[data-theme='light'] .reading-meta,
-:root[data-theme='light'] .reading-content,
-:root[data-theme='light'] .news-card,
-:root[data-theme='light'] .gallery-card,
-:root[data-theme='light'] .archive-card,
-:root[data-theme='light'] .announcement-card,
-:root[data-theme='light'] .rosary-visual,
-:root[data-theme='light'] .prayer-panel,
-:root[data-theme='light'] .sdg-detail,
-:root[data-theme='light'] .vianney-map-copy { background: linear-gradient(145deg, rgba(255,250,240,.96), rgba(241,234,223,.98)); box-shadow: 0 18px 44px rgba(81,59,26,.12); }
-:root[data-theme='light'] .map-card,
-:root[data-theme='light'] .contact-grid .map-card,
-:root[data-theme='light'] .gallery-empty,
-:root[data-theme='light'] .archive-empty,
-:root[data-theme='light'] .announcements-empty,
-:root[data-theme='light'] .news-status { background: rgba(255,250,240,.86); }
-:root[data-theme='light'] .social-main { background: #efe6d8; }
-:root[data-theme='light'] .social-card,
-:root[data-theme='light'] .social-modal-card { background: #fffdf8; }
-:root[data-theme='light'] .mystery-tabs button { background: rgba(255,250,240,.9); color: var(--text-light); }
-:root[data-theme='light'] .rosary-main-companion .mystery-tabs,
-:root[data-theme='light'] .companion-header,
-:root[data-theme='light'] .companion-beads,
-:root[data-theme='light'] .companion-controls { background: rgba(251,247,239,.96); }
 
 .home-hero { min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; padding: 2rem; text-align: center; background: linear-gradient(90deg, rgba(10,10,10,.84), rgba(10,10,10,.58), rgba(10,10,10,.76)), url('/hero.png') center/cover no-repeat; }
 .home-hero::before, .readings-hero::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23C5A059" opacity="0.12"/></svg>'); background-size: 48px 48px; opacity: .4; }

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 export default function GalleryClient({ items }) {
   const [selected, setSelected] = useState(null);
-  const groups = groupItems(items);
 
   useEffect(() => {
     if (!selected) return undefined;
@@ -24,27 +23,17 @@ export default function GalleryClient({ items }) {
 
   return (
     <>
-      <div className="gallery-groups">
-        {groups.map((group) => (
-          <section className="gallery-group" key={group.name}>
-            <div className="gallery-group-header">
-              <h2>{group.name}</h2>
-              <span>{group.items.length} {group.items.length === 1 ? 'photo' : 'photos'}</span>
-            </div>
-            <div className="gallery-grid">
-              {group.items.map((item) => (
-                <figure className="gallery-card" key={item.fileId}>
-                  <button type="button" onClick={() => setSelected(item)} aria-label={`Open ${item.title}`}>
-                    <img src={item.thumbnailUrl} alt={item.caption || item.title} loading="lazy" />
-                  </button>
-                  <figcaption>
-                    <h2>{item.title}</h2>
-                    {item.caption && <p>{item.caption}</p>}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
+      <div className="gallery-grid">
+        {items.map((item, index) => (
+          <figure className="gallery-card" key={`${item.title}-${index}`}>
+            <button type="button" onClick={() => setSelected(item)} aria-label={`Open ${item.title}`}>
+              <img src={item.thumbnailUrl} alt={item.caption || item.title} loading="lazy" />
+            </button>
+            <figcaption>
+              <h2>{item.title}</h2>
+              {item.caption && <p>{item.caption}</p>}
+            </figcaption>
+          </figure>
         ))}
       </div>
 
@@ -64,16 +53,4 @@ export default function GalleryClient({ items }) {
       )}
     </>
   );
-}
-
-function groupItems(items) {
-  const groups = new Map();
-
-  items.forEach((item) => {
-    const name = item.groupName || 'Gallery';
-    if (!groups.has(name)) groups.set(name, []);
-    groups.get(name).push(item);
-  });
-
-  return [...groups.entries()].map(([name, groupItems]) => ({ name, items: groupItems }));
 }
