@@ -514,6 +514,8 @@ a { color: inherit; }
   .prayer-panel { padding: 1.4rem; }
   .prayer-panel h2 { font-size: clamp(1.8rem, 10vw, 2.6rem); }
   .rosary-controls, .day-nav, .date-picker { display: grid; grid-template-columns: 1fr; }
+  .date-picker > * { width: 100%; min-width: 0; box-sizing: border-box; }
+  .date-picker input { display: block; justify-self: stretch; appearance: none; -webkit-appearance: none; }
   .rosary-controls button, .day-nav button, .date-picker button, .date-picker input, .outline-button { width: 100%; text-align: center; }
   .language-picker { display: grid; grid-template-columns: 1fr; }
   .language-picker button { width: 100%; }
