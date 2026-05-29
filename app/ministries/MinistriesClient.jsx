@@ -17,16 +17,11 @@ const categorySections = {
 const sectionOrder = ['Formation & Apostolates', 'Worship & Service', 'Community & Outreach'];
 
 export default function MinistriesClient({ ministries }) {
-  const [openCategories, setOpenCategories] = useState(() => new Set([ministries[0]?.category].filter(Boolean)));
+  const [openCategory, setOpenCategory] = useState(ministries[0]?.category || '');
   const sections = groupBySection(ministries);
 
   const toggleCategory = (category) => {
-    setOpenCategories((current) => {
-      const next = new Set(current);
-      if (next.has(category)) next.delete(category);
-      else next.add(category);
-      return next;
-    });
+    setOpenCategory((current) => (current === category ? '' : category));
   };
 
   return (
@@ -39,7 +34,7 @@ export default function MinistriesClient({ ministries }) {
           </div>
           <div className="ministries-grid">
             {section.groups.map((group) => {
-              const isOpen = openCategories.has(group.category);
+              const isOpen = openCategory === group.category;
               return (
                 <article className={`ministry-card ${isOpen ? 'open' : ''}`} key={group.category}>
                   <button className="ministry-card-toggle" type="button" onClick={() => toggleCategory(group.category)} aria-expanded={isOpen}>
