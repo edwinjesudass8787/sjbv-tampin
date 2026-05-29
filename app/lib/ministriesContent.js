@@ -31,14 +31,23 @@ export async function getMinistries() {
       const order = Number(record.order) || 9999;
 
       if (!category) return;
-      if (!grouped.has(category)) grouped.set(category, { category, ministries: [], order });
-      if (ministry) grouped.get(category).ministries.push({ name: ministry, picName, picImageUrl, order });
+      if (!grouped.has(category)) grouped.set(category, { category, ministries: [], picName: '', picImageUrl: '', order });
+
+      const group = grouped.get(category);
+      if (ministry) {
+        group.ministries.push({ name: ministry, picName, picImageUrl, order });
+      } else if (picName || picImageUrl) {
+        group.picName = picName;
+        group.picImageUrl = picImageUrl;
+      }
     });
 
     const ministries = [...grouped.values()]
       .sort((a, b) => a.order - b.order || a.category.localeCompare(b.category))
       .map((group) => ({
         category: group.category,
+        picName: group.picName,
+        picImageUrl: group.picImageUrl,
         ministries: group.ministries
           .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name))
           .map(({ order, ...ministry }) => ministry),

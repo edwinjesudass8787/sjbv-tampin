@@ -54,18 +54,15 @@ export default function MinistriesClient({ ministries }) {
                         {group.ministries.map((ministry) => (
                           <li key={ministry.name}>
                             <span>{ministry.name}</span>
-                            {(ministry.picName || ministry.picImageUrl) && (
-                              <div className="ministry-pic">
-                                {ministry.picImageUrl ? <img src={ministry.picImageUrl} alt="" /> : <div className="ministry-pic-fallback">{ministry.picName?.charAt(0) || 'P'}</div>}
-                                <div>
-                                  <small>Person-in-Charge</small>
-                                  {ministry.picName ? <strong>{ministry.picName}</strong> : <strong>To be confirmed</strong>}
-                                </div>
-                              </div>
-                            )}
+                            <PicBlock picName={ministry.picName} picImageUrl={ministry.picImageUrl} />
                           </li>
                         ))}
                       </ul>
+                    ) : group.picName || group.picImageUrl ? (
+                      <div className="ministry-card-empty">
+                        <p>Details coming soon.</p>
+                        <PicBlock picName={group.picName} picImageUrl={group.picImageUrl} />
+                      </div>
                     ) : (
                       <p>Details coming soon.</p>
                     )
@@ -77,6 +74,20 @@ export default function MinistriesClient({ ministries }) {
         </div>
       ))}
     </section>
+  );
+}
+
+function PicBlock({ picName, picImageUrl }) {
+  if (!picName && !picImageUrl) return null;
+
+  return (
+    <div className="ministry-pic">
+      {picImageUrl ? <img src={picImageUrl} alt="" /> : <div className="ministry-pic-fallback">{picName?.charAt(0) || 'P'}</div>}
+      <div>
+        <small>Person-in-Charge</small>
+        {picName ? <strong>{picName}</strong> : <strong>To be confirmed</strong>}
+      </div>
+    </div>
   );
 }
 
