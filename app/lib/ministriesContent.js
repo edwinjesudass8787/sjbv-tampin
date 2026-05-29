@@ -1,9 +1,9 @@
 const fallbackMinistries = [
-  { category: 'Catechetics', ministries: ['Catechism', 'RCIA'] },
-  { category: 'Language Apostolates', ministries: ['Tamil Apostolate', 'Chinese Apostolate'] },
-  { category: 'Liturgy', ministries: ['Hospitality Ministers', 'Altar Servers', 'Altar Ladies', 'Sacristan', 'Extraordinary Minister of Holy Communion (EMHC)', 'Choirs'] },
-  { category: 'Integrated Human Development (PIHD)', ministries: ['Society of St Vincent de Paul (SSVP)'] },
-  { category: 'Spiritual & Renewal', ministries: ['Legion of Mary', 'Praise and Worship'] },
+  { category: 'Catechetics', ministries: toMinistryItems(['Catechism', 'RCIA']) },
+  { category: 'Language Apostolates', ministries: toMinistryItems(['Tamil Apostolate', 'Chinese Apostolate']) },
+  { category: 'Liturgy', ministries: toMinistryItems(['Hospitality Ministers', 'Altar Servers', 'Altar Ladies', 'Sacristan', 'Extraordinary Minister of Holy Communion (EMHC)', 'Choirs']) },
+  { category: 'Integrated Human Development (PIHD)', ministries: toMinistryItems(['Society of St Vincent de Paul (SSVP)']) },
+  { category: 'Spiritual & Renewal', ministries: toMinistryItems(['Legion of Mary', 'Praise and Worship']) },
   { category: 'Youth', ministries: [] },
   { category: 'Social Communication', ministries: [] },
   { category: 'Family Life', ministries: [] },
@@ -26,11 +26,13 @@ export async function getMinistries() {
     records.forEach((record) => {
       const category = record.category || record.section || record.ministry_category || '';
       const ministry = record.ministry || record.name || record.ministry_name || '';
+      const picName = record.pic_name || record.person_in_charge || record.contact_name || '';
+      const picImageUrl = toImageUrl(record.pic_image_url || record.pic_image || record.contact_image || '');
       const order = Number(record.order) || 9999;
 
       if (!category) return;
       if (!grouped.has(category)) grouped.set(category, { category, ministries: [], order });
-      if (ministry) grouped.get(category).ministries.push({ name: ministry, order });
+      if (ministry) grouped.get(category).ministries.push({ name: ministry, picName, picImageUrl, order });
     });
 
     const ministries = [...grouped.values()]
@@ -39,13 +41,40 @@ export async function getMinistries() {
         category: group.category,
         ministries: group.ministries
           .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name))
-          .map((ministry) => ministry.name),
+          .map(({ order, ...ministry }) => ministry),
       }));
 
     return ministries.length > 0 ? ministries : fallbackMinistries;
   } catch {
     return fallbackMinistries;
   }
+}
+
+function toMinistryItems(names) {
+  return names.map((name) => ({ name, picName: '', picImageUrl: '' }));
+}
+
+function toImageUrl(value) {
+  if (!value) return '';
+  const fileId = extractDriveFileId(value);
+  if (fileId) return `https://lh3.googleusercontent.com/d/${fileId}=w400`;
+  return value;
+}
+
+function extractDriveFileId(value = '') {
+  const patterns = [
+    /drive\.google\.com\/file\/d\/([^/]+)/,
+    /drive\.google\.com\/open\?id=([^&]+)/,
+    /drive\.google\.com\/uc\?[^\s]*id=([^&]+)/,
+    /^[a-zA-Z0-9_-]{20,}$/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match) return match[1] || match[0];
+  }
+
+  return '';
 }
 
 function normalizeHeader(header) {

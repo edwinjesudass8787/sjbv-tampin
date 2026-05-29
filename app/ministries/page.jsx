@@ -1,5 +1,6 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import MinistriesClient from './MinistriesClient';
 import { getMinistries } from '../lib/ministriesContent';
 
 export const metadata = {
@@ -23,21 +24,19 @@ export default async function MinistriesPage() {
         </div>
       </section>
       <main className="ministries-main">
-        <section className="ministries-grid" aria-label="Parish ministries">
-          {ministries.map((group) => (
-            <article className="ministry-card" key={group.category}>
-              <h2>{group.category}</h2>
-              {group.ministries.length > 0 ? (
-                <ul>
-                  {group.ministries.map((ministry) => (
-                    <li key={ministry}>{ministry}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Details coming soon.</p>
-              )}
-            </article>
-          ))}
+        <section className="ministries-intro">
+          <span>Called To Serve</span>
+          <h2>Every ministry is a way of serving Christ and His Church.</h2>
+          <p>
+            Find a place to offer your gifts, grow in faith, and serve the parish community through worship,
+            formation, outreach, communication, and fellowship.
+          </p>
+        </section>
+        <MinistriesClient ministries={ministries} />
+        <section className="ministries-cta">
+          <span>Interested in joining?</span>
+          <h2>Speak to the Parish Priest or contact the parish office after Mass.</h2>
+          <p>We would be glad to help you discern where your gifts can serve the community best.</p>
         </section>
       </main>
       <Footer />
