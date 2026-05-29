@@ -6,22 +6,126 @@ const mysteries = {
   joyful: {
     label: 'Joyful',
     days: 'Mon & Sat',
-    items: ['The Annunciation', 'The Visitation', 'The Nativity', 'The Presentation', 'The Finding of Jesus in the Temple'],
+    items: [
+      {
+        title: 'The Annunciation',
+        description: 'The angel Gabriel announces that Mary will conceive by the Holy Spirit, and Mary gives her faithful yes to God.',
+        fruit: 'Humility',
+      },
+      {
+        title: 'The Visitation',
+        description: 'Mary visits Elizabeth, bringing Christ hidden within her and serving her cousin with joyful love.',
+        fruit: 'Love of Neighbor',
+      },
+      {
+        title: 'The Nativity',
+        description: 'Jesus is born in Bethlehem and laid in a manger, revealing the tenderness and poverty of God made man.',
+        fruit: 'Poverty of Spirit',
+      },
+      {
+        title: 'The Presentation',
+        description: 'Mary and Joseph present Jesus in the Temple, offering Him to the Father in obedience to the Law.',
+        fruit: 'Obedience',
+      },
+      {
+        title: 'The Finding of Jesus in the Temple',
+        description: 'After three days of searching, Mary and Joseph find Jesus in the Temple, about His Father\'s work.',
+        fruit: 'Joy in Finding Jesus',
+      },
+    ],
   },
   luminous: {
     label: 'Luminous',
     days: 'Thursday',
-    items: ['The Baptism of Jesus', 'The Wedding at Cana', 'The Proclamation of the Kingdom', 'The Transfiguration', 'The Institution of the Eucharist'],
+    items: [
+      {
+        title: 'The Baptism of Jesus',
+        description: 'Jesus is baptized in the Jordan, the heavens open, and the Father reveals Him as His beloved Son.',
+        fruit: 'Openness to the Holy Spirit',
+      },
+      {
+        title: 'The Wedding at Cana',
+        description: 'At Mary\'s request, Jesus changes water into wine, revealing His glory and inviting trust in Him.',
+        fruit: 'Trust in Mary\'s Intercession',
+      },
+      {
+        title: 'The Proclamation of the Kingdom',
+        description: 'Jesus announces the Kingdom of God, calling all people to repentance, conversion, and faith.',
+        fruit: 'Conversion of Heart',
+      },
+      {
+        title: 'The Transfiguration',
+        description: 'Jesus is transfigured in glory before Peter, James, and John, strengthening them for the Cross.',
+        fruit: 'Desire for Holiness',
+      },
+      {
+        title: 'The Institution of the Eucharist',
+        description: 'At the Last Supper, Jesus gives His Body and Blood as the lasting gift of His presence and sacrifice.',
+        fruit: 'Love of the Eucharist',
+      },
+    ],
   },
   sorrowful: {
     label: 'Sorrowful',
     days: 'Tue & Fri',
-    items: ['The Agony in the Garden', 'The Scourging at the Pillar', 'The Crowning with Thorns', 'The Carrying of the Cross', 'The Crucifixion'],
+    items: [
+      {
+        title: 'The Agony in the Garden',
+        description: 'Jesus prays in Gethsemane, accepting the Father\'s will as He enters into His Passion for our salvation.',
+        fruit: 'Sorrow for Sin',
+      },
+      {
+        title: 'The Scourging at the Pillar',
+        description: 'Jesus is cruelly scourged, bearing the wounds of sin with silent love and mercy.',
+        fruit: 'Purity',
+      },
+      {
+        title: 'The Crowning with Thorns',
+        description: 'Jesus is mocked as king and crowned with thorns, revealing a kingship of humility and suffering love.',
+        fruit: 'Moral Courage',
+      },
+      {
+        title: 'The Carrying of the Cross',
+        description: 'Jesus carries the Cross to Calvary, inviting us to follow Him with patience and trust.',
+        fruit: 'Patience',
+      },
+      {
+        title: 'The Crucifixion',
+        description: 'Jesus dies on the Cross, forgiving sinners and giving His life completely for the salvation of the world.',
+        fruit: 'Perseverance',
+      },
+    ],
   },
   glorious: {
     label: 'Glorious',
     days: 'Wed & Sun',
-    items: ['The Resurrection', 'The Ascension', 'The Descent of the Holy Spirit', 'The Assumption of Mary', 'The Coronation of Mary'],
+    items: [
+      {
+        title: 'The Resurrection',
+        description: 'Jesus rises from the dead, conquering sin and death and opening the way to new life.',
+        fruit: 'Faith',
+      },
+      {
+        title: 'The Ascension',
+        description: 'Jesus ascends to the Father, promising to remain with His Church and prepare a place for us.',
+        fruit: 'Hope',
+      },
+      {
+        title: 'The Descent of the Holy Spirit',
+        description: 'The Holy Spirit descends upon Mary and the Apostles, giving courage to proclaim the Gospel.',
+        fruit: 'Wisdom and Zeal',
+      },
+      {
+        title: 'The Assumption of Mary',
+        description: 'Mary is taken body and soul into heaven, a sign of the glory promised to those who belong to Christ.',
+        fruit: 'Grace of a Happy Death',
+      },
+      {
+        title: 'The Coronation of Mary',
+        description: 'Mary is crowned Queen of Heaven and Earth, interceding for her children with motherly love.',
+        fruit: 'Trust in Mary\'s Care',
+      },
+    ],
   },
 };
 
@@ -69,12 +173,12 @@ function buildBeads(mysteryKey) {
   ];
 
   selected.items.forEach((mystery, mysteryIndex) => {
-    beads.push({ type: 'large', label: `Mystery ${mysteryIndex + 1}`, prayer: prayers.ourFather, mystery, section: mystery });
+    beads.push({ type: 'large', label: `Mystery ${mysteryIndex + 1}`, prayer: prayers.ourFather, mystery, section: mystery.title });
     for (let hailMary = 1; hailMary <= 10; hailMary += 1) {
-      beads.push({ type: 'small', label: `Hail Mary ${hailMary}`, prayer: prayers.hailMary, mystery, section: mystery });
+      beads.push({ type: 'small', label: `Hail Mary ${hailMary}`, prayer: prayers.hailMary, mystery, section: mystery.title });
     }
-    beads.push({ type: 'large', label: 'Glory Be', prayer: prayers.gloryBe, mystery, section: mystery });
-    beads.push({ type: 'large', label: 'Fatima Prayer', prayer: prayers.fatima, mystery, section: mystery });
+    beads.push({ type: 'large', label: 'Glory Be', prayer: prayers.gloryBe, mystery, section: mystery.title });
+    beads.push({ type: 'large', label: 'Fatima Prayer', prayer: prayers.fatima, mystery, section: mystery.title });
   });
 
   beads.push({ type: 'large', label: 'Closing', prayer: prayers.hailHolyQueen, section: 'Closing' });
@@ -160,7 +264,13 @@ export default function RosaryClient() {
           <div className="prayer-panel-scroll">
             <div className="eyebrow">{selectedMystery.label} Mysteries</div>
             <h2>{currentBead.prayer.title}</h2>
-            {currentBead.mystery && <h3>{currentBead.mystery}</h3>}
+            {currentBead.mystery && <h3>{currentBead.mystery.title}</h3>}
+            {currentBead.mystery && (
+              <div className="mystery-reflection">
+                <p>{currentBead.mystery.description}</p>
+                <span>Fruit of the Mystery: {currentBead.mystery.fruit}</span>
+              </div>
+            )}
             <p className="bead-label">{currentBead.label} — {currentBead.section}</p>
             <p className="prayer-text">{currentBead.prayer.text}</p>
           </div>
@@ -176,11 +286,17 @@ export default function RosaryClient() {
       <div className="rosary-companion">
         <div className="companion-header">
           <span className="companion-mystery">{selectedMystery.label}</span>
-          {currentBead.mystery && <span className="companion-decade">{currentBead.mystery}</span>}
+          {currentBead.mystery && <span className="companion-decade">{currentBead.mystery.title}</span>}
         </div>
         <h2 className="companion-title">{currentBead.prayer.title}</h2>
         <p className="companion-bead-label">{currentBead.label} — {currentBead.section}</p>
         <div className="companion-text">
+          {currentBead.mystery && (
+            <div className="companion-reflection">
+              <p>{currentBead.mystery.description}</p>
+              <span>Fruit: {currentBead.mystery.fruit}</span>
+            </div>
+          )}
           <p>{currentBead.prayer.text}</p>
         </div>
         <div className="companion-beads" ref={beadStripRef}>
