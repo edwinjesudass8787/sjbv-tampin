@@ -12,6 +12,7 @@ export async function getSocialBoardPosts() {
     return rows
       .slice(1)
       .map((row) => toRecord(headers, row))
+      .filter((post) => isPublished(post))
       .filter((post) => hasConsent(post))
       .filter((post) => isApproved(post))
       .filter((post) => getMessage(post) || getImageSource(post))
@@ -71,6 +72,11 @@ function isApproved(post) {
   if (!post.approved && !post.status) return true;
   const value = (post.approved || post.status).toLowerCase();
   return ['yes', 'y', 'true', 'approved', 'publish', 'published'].includes(value);
+}
+
+function isPublished(post) {
+  if (!Object.prototype.hasOwnProperty.call(post, 'publish')) return true;
+  return ['yes', 'y', 'true'].includes(post.publish.toLowerCase());
 }
 
 function firstValue(value = '') {

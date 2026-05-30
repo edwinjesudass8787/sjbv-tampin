@@ -3,7 +3,7 @@ import Footer from './components/Footer';
 import { getLandingContent } from './lib/landingContent';
 
 const massDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const outstationKeys = ['Gemas', 'KualaPilah', 'Gemencheh'];
+const outstationKeys = ['Gemas', 'KualaPilah', 'Gemencheh', 'Bahau'];
 const bulletinUrl = 'https://drive.google.com/drive/folders/1HRojZr3m8KbAkJCk75-qytI2-3uoFWQF?usp=sharing';
 
 export default async function HomePage() {
@@ -166,9 +166,20 @@ function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picP
 
   return (
     <article className="outstation-card">
-      <div className="outstation-image">
-        <img src={image} alt={name} />
-      </div>
+      {image ? (
+        <div className="outstation-image">
+          <img src={image} alt={name} />
+        </div>
+      ) : (
+        <div className="outstation-map">
+          <iframe
+            src={`https://www.google.com/maps?q=${query}&output=embed`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title={`Map to ${name} outstation church`}
+          />
+        </div>
+      )}
       <div className="outstation-body">
         <span>Outstation Church</span>
         <h3>{name}</h3>
