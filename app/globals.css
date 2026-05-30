@@ -216,6 +216,9 @@ a { color: inherit; }
 .reading-content th[align="right"] { color: var(--text-muted); font-family: Lato, sans-serif; font-size: .95rem; letter-spacing: 0; margin-top: .35rem; }
 .reading-content .rubric { color: var(--text-muted); font-style: italic; text-align: center; }
 .reading-content .p, .reading-content .pi { line-height: 1.75; }
+.reading-content .audioclip { margin: 1.2rem 0 1.6rem; padding: 1rem; border: 1px solid rgba(197,160,89,.18); background: rgba(197,160,89,.06); text-align: center; }
+.reading-content .audioclip audio { width: 100%; max-width: 520px; }
+.reading-content .audioclip a { display: inline-block; margin-top: .5rem; color: var(--gold-light); font-size: .85rem; }
 .translation-note { padding: .9rem 1rem; margin-bottom: 1.5rem; border-left: 3px solid var(--gold); background: rgba(197,160,89,.08); color: var(--text-muted); font-style: italic; }
 .actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
 .day-nav { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.2rem; }

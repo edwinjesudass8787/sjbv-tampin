@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-const SOURCE_BASE = 'https://www.catholicgallery.org/mass-reading';
+const SOURCE_BASE = 'https://universalis.com';
 const LANGUAGES = {
   en: { label: 'English', code: 'en' },
   ms: { label: 'Bahasa Malaysia', code: 'ms' },
@@ -34,13 +34,13 @@ export async function GET(request) {
       ? extractByClass(html, 'dayTitle') || extractTitle(html) || 'Tamil Mass Readings'
       : language.direct === 'chinese'
         ? extractChineseTitle(html) || 'Chinese Daily Readings'
-      : extractById(html, 'cgdaydesc') || extractTitle(html) || 'Daily Mass Readings'
+      : extractUniversalisTitle(html) || extractTitle(html) || 'Daily Mass Readings'
   ));
   const sourceDescription = language.direct === 'tamil'
-    ? extractTamilReadings(html)
-    : language.direct === 'chinese'
-      ? extractChineseReadings(html)
-      : extractReadings(html);
+      ? extractTamilReadings(html)
+      : language.direct === 'chinese'
+        ? extractChineseReadings(html)
+      : extractUniversalisReadings(html, language.code === 'en');
 
   if (!sourceDescription) {
     return Response.json({ error: 'No readings found.' }, { status: 404 });
@@ -72,7 +72,39 @@ function getSourceLink(language, date) {
     return `http://catholic-dlc.org.hk/${getChineseCyclePrefix(date)}${formatChineseDate(date)}.htm`;
   }
 
-  return `${SOURCE_BASE}/${formatCatholicGalleryDate(date)}/`;
+  return `${SOURCE_BASE}/${formatUniversalisDate(date)}/mass.htm`;
+}
+
+function extractUniversalisReadings(html, includeAudio = false) {
+  const start = html.indexOf('<h1 id="univPageName"');
+  const fallbackStart = html.indexOf('<div id="innertexst"');
+  const contentStart = start === -1 ? fallbackStart : start;
+  const endMarkers = [
+    '<p class="rubric">The responsorial psalms',
+    '<div style="text-align:center; width:100%;">',
+    '</div>\n<div style="text-align:center',
+  ];
+
+  if (contentStart === -1) return '';
+
+  const contentEnd = endMarkers
+    .map((marker) => html.indexOf(marker, contentStart))
+    .filter((index) => index > contentStart)
+    .sort((a, b) => a - b)[0] || html.indexOf('</div>', contentStart);
+
+  if (contentEnd === -1) return '';
+
+  return sanitize(html.slice(contentStart, contentEnd))
+    .replace(/<div id="appplug"[\s\S]*?<\/div>/gi, '')
+    .replace(includeAudio ? /$^/ : /<div class="audioclip"[\s\S]*?<\/div>/gi, '')
+    .replace(/<hr class="shortrule"\s*\/?\s*>/gi, '')
+    .replace(/\sstyle=("[^"]*"|'[^']*')/gi, '')
+    .trim();
+}
+
+function extractUniversalisTitle(html) {
+  const feastName = extractById(html, 'feastname');
+  return decodeHtml(stripTags(feastName)).trim();
 }
 
 function extractTamilReadings(html) {
@@ -235,6 +267,13 @@ function formatCatholicGalleryDate(date) {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = String(date.getFullYear()).slice(-2);
   return `${day}${month}${year}`;
+}
+
+function formatUniversalisDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}${month}${day}`;
 }
 
 function formatChineseDate(date) {
