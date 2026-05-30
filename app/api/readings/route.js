@@ -81,6 +81,10 @@ function extractUniversalisReadings(html, includeAudio = false) {
   const contentStart = start === -1 ? fallbackStart : start;
   const endMarkers = [
     '<p class="rubric">The responsorial psalms',
+    '<p class="rubric">You can also view this page',
+    '<div class="podcastentry"',
+    '<h2>Christian Art</h2>',
+    'christian.art/',
     '<div style="text-align:center; width:100%;">',
     '</div>\n<div style="text-align:center',
   ];
@@ -98,6 +102,8 @@ function extractUniversalisReadings(html, includeAudio = false) {
     .replace(/<div id="appplug"[\s\S]*?<\/div>/gi, '')
     .replace(/<div[^>]+class="[^"]*toprightbox[^"]*"[\s\S]*?<\/div>/gi, '')
     .replace(/<div[^>]+class="[^"]*christianart[^"]*"[\s\S]*?<\/div>/gi, '')
+    .replace(/<div class="podcastentry"[\s\S]*?<\/div>/gi, '')
+    .replace(/<h2>Christian Art<\/h2>[\s\S]*$/gi, '')
     .replace(/<h1 id="univPageName"[\s\S]*?<\/h1>/gi, '')
     .replace(/<p class="rubric"><i>Liturgical Colour:[\s\S]*?<\/p>/gi, '')
     .replace(includeAudio ? /$^/ : /<div class="audioclip"[\s\S]*?<\/div>/gi, '')
