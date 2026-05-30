@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Nav({ active }) {
   const [open, setOpen] = useState(false);
+  const activeSecondaryRef = useRef(null);
   const mainLinks = [
     { href: '/', label: 'Home', key: 'home' },
     { href: '/announcements', label: 'Announcements', key: 'announcements' },
@@ -21,6 +22,10 @@ export default function Nav({ active }) {
     { href: '/sdg', label: 'SDG', key: 'sdg' },
     { href: '/rosary', label: 'Rosary', key: 'rosary' },
   ];
+
+  useEffect(() => {
+    activeSecondaryRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }, [active]);
 
   return (
     <header className="nav-stack">
@@ -61,13 +66,22 @@ export default function Nav({ active }) {
           </a>
         </div>
       </nav>
-      <nav className="secondary-nav" aria-label="Faith formation navigation">
-        {secondaryLinks.map((link) => (
-          <Link href={link.href} key={link.key} className={active === link.key ? 'active' : ''}>
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="secondary-nav-shell">
+        <nav className="secondary-nav" aria-label="Faith formation navigation">
+          {secondaryLinks.map((link) => (
+            <Link
+              href={link.href}
+              key={link.key}
+              ref={active === link.key ? activeSecondaryRef : null}
+              className={active === link.key ? 'active' : ''}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <span className="secondary-nav-arrow secondary-nav-arrow-left" aria-hidden="true">‹</span>
+        <span className="secondary-nav-arrow secondary-nav-arrow-right" aria-hidden="true">›</span>
+      </div>
     </header>
   );
 }
