@@ -94,12 +94,25 @@ function extractUniversalisReadings(html, includeAudio = false) {
 
   if (contentEnd === -1) return '';
 
-  return sanitize(html.slice(contentStart, contentEnd))
+  const cleaned = sanitize(html.slice(contentStart, contentEnd))
     .replace(/<div id="appplug"[\s\S]*?<\/div>/gi, '')
+    .replace(/<div[^>]+class="[^"]*toprightbox[^"]*"[\s\S]*?<\/div>/gi, '')
+    .replace(/<div[^>]+class="[^"]*christianart[^"]*"[\s\S]*?<\/div>/gi, '')
+    .replace(/<h1 id="univPageName"[\s\S]*?<\/h1>/gi, '')
+    .replace(/<p class="rubric"><i>Liturgical Colour:[\s\S]*?<\/p>/gi, '')
     .replace(includeAudio ? /$^/ : /<div class="audioclip"[\s\S]*?<\/div>/gi, '')
     .replace(/<hr class="shortrule"\s*\/?\s*>/gi, '')
     .replace(/\sstyle=("[^"]*"|'[^']*')/gi, '')
     .trim();
+
+  return includeAudio ? keepOnlyAudioPlayers(cleaned) : cleaned;
+}
+
+function keepOnlyAudioPlayers(html) {
+  return html.replace(/<div class="audioclip">[\s\S]*?<\/div>/gi, (block) => {
+    const audio = block.match(/<audio[\s\S]*?<\/audio>/i)?.[0];
+    return audio ? `<div class="audioclip">${audio}</div>` : '';
+  });
 }
 
 function extractUniversalisTitle(html) {
