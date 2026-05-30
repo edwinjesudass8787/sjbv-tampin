@@ -41,7 +41,33 @@ const DEFAULT_CONTENT = {
   visitTitle: 'Visit Us',
   visitSubtitle: 'We look forward to welcoming you',
   contactTitle: 'Contact',
+  contactPhone: '+60 6-441 1234',
+  contactTiming: 'Mon - Fri, 9:00 AM - 4:00 PM',
+  contactEmail: 'stjohnvianney.tampin@gmail.com',
   contactText: 'Jalan Besar, Tampin, 73000\nPhone: +60 6-441 1234\nEmail: stjohnvianney.tampin@gmail.com\nMon - Fri, 9:00 AM - 4:00 PM',
+  outstationTitle: 'Outstation Churches',
+  outstationSubtitle: 'Serving the wider parish family beyond Tampin',
+  outstationGemasName: 'Church of St Christopher',
+  outstationGemasDistrict: 'Gemas, Tampin District',
+  outstationGemasImage: '/gemas.png',
+  outstationGemasMapQuery: 'Church of St Christopher Gemas',
+  outstationGemasMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Gemas',
+  outstationGemasPicName: '',
+  outstationGemasPicPhone: '',
+  outstationKualaPilahName: 'Church of St Joseph',
+  outstationKualaPilahDistrict: 'Kuala Pilah District',
+  outstationKualaPilahImage: '/kuala-pilah.png',
+  outstationKualaPilahMapQuery: 'Church of St Joseph Kuala Pilah',
+  outstationKualaPilahMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Kuala%20Pilah',
+  outstationKualaPilahPicName: '',
+  outstationKualaPilahPicPhone: '',
+  outstationGemenchehName: 'St Dominic Catholic Mass Centre',
+  outstationGemenchehDistrict: 'Gemencheh, Tampin District',
+  outstationGemenchehImage: '/gemencheh.png',
+  outstationGemenchehMapQuery: 'St Dominic Catholic Mass Centre Gemencheh',
+  outstationGemenchehMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Gemencheh',
+  outstationGemenchehPicName: '',
+  outstationGemenchehPicPhone: '',
 };
 
 export async function getLandingContent() {
@@ -55,7 +81,9 @@ export async function getLandingContent() {
     const rows = parseCsv(await response.text());
     const content = { ...DEFAULT_CONTENT };
 
-    rows.slice(1).forEach((row) => {
+    const contentRows = isHeaderRow(rows[0]) ? rows.slice(1) : rows;
+
+    contentRows.forEach((row) => {
       const key = row[0]?.trim();
       const value = row[1]?.trim();
       if (key && (value || key.startsWith('mass'))) content[key] = value || '';
@@ -65,6 +93,12 @@ export async function getLandingContent() {
   } catch {
     return DEFAULT_CONTENT;
   }
+}
+
+function isHeaderRow(row = []) {
+  const firstCell = row[0]?.trim().toLowerCase();
+  const secondCell = row[1]?.trim().toLowerCase();
+  return ['key', 'field', 'name'].includes(firstCell) && ['value', 'content', 'text'].includes(secondCell);
 }
 
 function parseCsv(csv) {

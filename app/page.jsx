@@ -3,6 +3,8 @@ import Footer from './components/Footer';
 import { getLandingContent } from './lib/landingContent';
 
 const massDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const outstationKeys = ['Gemas', 'KualaPilah', 'Gemencheh'];
+const bulletinUrl = 'https://drive.google.com/drive/folders/1HRojZr3m8KbAkJCk75-qytI2-3uoFWQF?usp=sharing';
 
 export default async function HomePage() {
   const content = await getLandingContent();
@@ -14,6 +16,17 @@ export default async function HomePage() {
       note: content[`mass${day}Note`],
     }))
     .filter((mass) => mass.time);
+  const outstations = outstationKeys
+    .map((key) => ({
+      name: content[`outstation${key}Name`],
+      district: content[`outstation${key}District`],
+      image: content[`outstation${key}Image`],
+      mapQuery: content[`outstation${key}MapQuery`],
+      mapUrl: content[`outstation${key}MapUrl`],
+      picName: content[`outstation${key}PicName`],
+      picPhone: content[`outstation${key}PicPhone`],
+    }))
+    .filter((outstation) => outstation.name);
 
   return (
     <>
@@ -67,7 +80,7 @@ export default async function HomePage() {
         </div>
         <div className="bulletin-board">
           <a 
-            href="https://drive.google.com/drive/folders/1HRojZr3m8KbAkJCk75-qytI2-3uoFWQF?usp=sharing" 
+            href={bulletinUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="bulletin-button"
@@ -81,7 +94,13 @@ export default async function HomePage() {
       <section className="section contact" id="contact">
         <SectionHeader title={content.visitTitle} subtitle={content.visitSubtitle} />
         <div className="contact-grid">
-          <ContactItem title={content.contactTitle} text={content.contactText} />
+          <ContactItem
+            title={content.contactTitle}
+            phone={content.contactPhone}
+            timing={content.contactTiming}
+            email={content.contactEmail}
+            text={content.contactText}
+          />
           <div className="map-card">
           <iframe
             src="https://www.google.com/maps?q=Church%20Of%20St%20John%20Marie%20Vianney%20(1935)%2C%20Tampin&output=embed"
@@ -93,6 +112,20 @@ export default async function HomePage() {
             <a href="https://www.google.com/maps/place/Church+Of+St+John+Marie+Vianney+(1935)/data=!4m2!3m1!1s0x0:0x313df931fd6d22ea?sa=X&ved=1t:2428&ictx=111&cshid=1779770849381800" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
           </div>
         </div>
+        </div>
+      </section>
+
+      <section className="section outstations" id="outstations">
+        <SectionHeader title={content.outstationTitle} subtitle={content.outstationSubtitle} />
+        <div className="outstation-grid">
+          {outstations.map((outstation) => (
+            <OutstationCard key={outstation.name} {...outstation} />
+          ))}
+        </div>
+        <div className="outstation-actions">
+          <a href={bulletinUrl} target="_blank" rel="noopener noreferrer" className="bulletin-button">
+            View Bulletin
+          </a>
         </div>
       </section>
       <Footer />
@@ -108,8 +141,53 @@ function MassCard({ day, time, language, note }) {
   return <div className="mass-card"><div className="day">{day}</div><div className="time">{time}</div><div className="language">{language}</div><div className="note">{note}</div></div>;
 }
 
-function ContactItem({ title, text }) {
-  return <div className="contact-item"><div className="contact-icon">✦</div><h3>{title}</h3><ContentParagraph text={text} /></div>;
+function ContactItem({ title, phone, timing, email, text }) {
+  const hasStructuredContact = phone || timing || email;
+
+  return (
+    <div className="contact-item">
+      <div className="contact-icon">✦</div>
+      <h3>{title}</h3>
+      {hasStructuredContact ? (
+        <div className="contact-lines">
+          {phone && <a href={`tel:${toPhoneHref(phone)}`}>Phone: {phone}</a>}
+          {email && <a href={`mailto:${email}`}>Email: {email}</a>}
+          {timing && <span>{timing}</span>}
+        </div>
+      ) : (
+        <ContentParagraph text={text} />
+      )}
+    </div>
+  );
+}
+
+function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picPhone }) {
+  const query = encodeURIComponent(mapQuery || name);
+
+  return (
+    <article className="outstation-card">
+      <div className="outstation-image">
+        <img src={image} alt={name} />
+      </div>
+      <div className="outstation-body">
+        <span>Outstation Church</span>
+        <h3>{name}</h3>
+        {district && <p className="outstation-district">{district}</p>}
+        <div className="outstation-contact">
+          <small>Person-in-Charge</small>
+          <strong>{picName || 'To be confirmed'}</strong>
+          {picPhone ? <a href={`tel:${toPhoneHref(picPhone)}`}>{picPhone}</a> : <em>Phone number to be confirmed</em>}
+        </div>
+        <a className="outstation-link" href={mapUrl || `https://www.google.com/maps/search/?api=1&query=${query}`} target="_blank" rel="noopener noreferrer">
+          Open in Google Maps
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function toPhoneHref(phone) {
+  return phone.replace(/[^+\d]/g, '');
 }
 
 function ContentParagraph({ text }) {
