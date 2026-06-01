@@ -16,9 +16,9 @@ export async function getBecs() {
     return records
       .map((record, index) => ({
         name: record.bec_name || record.name || record.bec || '',
-        coverageArea: record.coverage_area || record.area || '',
+        coverageArea: record.chairperson_phone || record.area || '',
         chairpersonName: record.chairperson_name || record.chairperson || record.pic_name || '',
-        chairpersonPhone: record.chairperson_phone || record.phone || record.contact_number || '',
+        chairpersonPhone: record.coverage_area || record.phone || record.contact_number || '',
         order: Number(record.order) || index + 1,
       }))
       .filter((bec) => bec.name || bec.coverageArea || bec.chairpersonName || bec.chairpersonPhone)
