@@ -45,7 +45,7 @@ const DEFAULT_CONTENT = {
   contactTiming: 'Mon - Fri, 9:00 AM - 4:00 PM',
   contactEmail: 'stjohnvianney.tampin@gmail.com',
   contactText: 'Jalan Besar, Tampin, 73000\nPhone: +60 6-441 1234\nEmail: stjohnvianney.tampin@gmail.com\nMon - Fri, 9:00 AM - 4:00 PM',
-  outstationTitle: 'Outstation Churches',
+  outstationTitle: 'Outstation Chapels & Centre',
   outstationSubtitle: 'Serving the wider parish family beyond Tampin',
   outstationGemasName: 'Chapel of St Christopher',
   outstationGemasDistrict: 'Gemas, Tampin District',
