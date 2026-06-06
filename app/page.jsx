@@ -16,8 +16,7 @@ export default async function HomePage() {
       note: content[`mass${day}Note`],
     }))
     .filter((mass) => mass.time);
-  const outstations = outstationKeys
-    .map((key) => ({
+  const outstations = (await Promise.all(outstationKeys.map(async (key) => ({
       name: content[`outstation${key}Name`],
       district: content[`outstation${key}District`],
       image: content[`outstation${key}Image`],
@@ -25,8 +24,8 @@ export default async function HomePage() {
       mapUrl: content[`outstation${key}MapUrl`],
       picName: content[`outstation${key}PicName`],
       picPhone: content[`outstation${key}PicPhone`],
-      links: toOutstationLinks(content[`outstation${key}Url`]),
-    }))
+      links: await toOutstationLinks(content[`outstation${key}Url`]),
+    }))))
     .filter((outstation) => outstation.name);
 
   return (
@@ -207,12 +206,56 @@ function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picP
   );
 }
 
-function toOutstationLinks(value = '') {
-  return value
+async function toOutstationLinks(value = '') {
+  const urls = value
     .split(',')
     .map((url) => url.trim())
     .filter(Boolean)
-    .map((url, index) => ({ url, label: `Link ${index + 1}` }));
+    .map((url) => normalizeUrl(url))
+    .filter(Boolean);
+
+  return Promise.all(urls.map(async (url, index) => ({
+    url,
+    label: await getLinkTitle(url) || `Link ${index + 1}`,
+  })));
+}
+
+function normalizeUrl(value) {
+  const url = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+
+  try {
+    return new URL(url).toString();
+  } catch {
+    return '';
+  }
+}
+
+async function getLinkTitle(url) {
+  try {
+    const response = await fetch(url, {
+      headers: { 'user-agent': 'SJBV-Tampin/1.0' },
+      next: { revalidate: 86400 },
+      signal: AbortSignal.timeout(3000),
+    });
+
+    if (!response.ok) return '';
+    const html = await response.text();
+    return decodeHtml(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '').trim();
+  } catch {
+    return '';
+  }
+}
+
+function decodeHtml(value) {
+  return value
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    .replaceAll('&nbsp;', ' ')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#039;', "'");
 }
 
 function toPhoneHref(phone) {
