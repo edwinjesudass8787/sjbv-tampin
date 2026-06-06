@@ -25,6 +25,7 @@ export default async function HomePage() {
       mapUrl: content[`outstation${key}MapUrl`],
       picName: content[`outstation${key}PicName`],
       picPhone: content[`outstation${key}PicPhone`],
+      links: toOutstationLinks(content[`outstation${key}Url`]),
     }))
     .filter((outstation) => outstation.name);
 
@@ -161,7 +162,7 @@ function ContactItem({ title, phone, timing, email, text }) {
   );
 }
 
-function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picPhone }) {
+function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picPhone, links }) {
   const query = encodeURIComponent(mapQuery || name);
 
   return (
@@ -192,9 +193,26 @@ function OutstationCard({ name, district, image, mapQuery, mapUrl, picName, picP
         <a className="outstation-link" href={mapUrl || `https://www.google.com/maps/search/?api=1&query=${query}`} target="_blank" rel="noopener noreferrer">
           Open in Google Maps
         </a>
+        {links.length > 0 && (
+          <div className="outstation-custom-links">
+            {links.map((link, index) => (
+              <a href={link.url} key={`${link.url}-${index}`} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   );
+}
+
+function toOutstationLinks(value = '') {
+  return value
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean)
+    .map((url, index) => ({ url, label: `Link ${index + 1}` }));
 }
 
 function toPhoneHref(phone) {

@@ -54,6 +54,7 @@ const DEFAULT_CONTENT = {
   outstationGemasMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Gemas',
   outstationGemasPicName: '',
   outstationGemasPicPhone: '',
+  outstationGemasUrl: '',
   outstationKualaPilahName: 'Chapel of St Joseph',
   outstationKualaPilahDistrict: 'Kuala Pilah District',
   outstationKualaPilahImage: '/kuala-pilah.png',
@@ -61,6 +62,7 @@ const DEFAULT_CONTENT = {
   outstationKualaPilahMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Kuala%20Pilah',
   outstationKualaPilahPicName: '',
   outstationKualaPilahPicPhone: '',
+  outstationKualaPilahUrl: '',
   outstationGemenchehName: 'St Dominic Catholic Mass Centre',
   outstationGemenchehDistrict: 'Gemencheh, Tampin District',
   outstationGemenchehImage: '/gemencheh.png',
@@ -68,6 +70,7 @@ const DEFAULT_CONTENT = {
   outstationGemenchehMapUrl: 'https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20Gemencheh',
   outstationGemenchehPicName: '',
   outstationGemenchehPicPhone: '',
+  outstationGemenchehUrl: '',
   outstationBahauName: 'Chapel Mary Mother of God',
   outstationBahauDistrict: 'Bahau, Jempol District',
   outstationBahauImage: '/bahau.png',
@@ -75,6 +78,7 @@ const DEFAULT_CONTENT = {
   outstationBahauMapUrl: 'https://maps.app.goo.gl/bv7C6xau25YEsM979',
   outstationBahauPicName: '',
   outstationBahauPicPhone: '',
+  outstationBahauUrl: '',
 };
 
 export async function getLandingContent() {

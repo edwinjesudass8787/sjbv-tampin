@@ -132,6 +132,9 @@ a { color: inherit; }
 .outstation-contact a { display: inline-block; color: var(--gold-light); text-decoration: none; margin-top: .35rem; }
 .outstation-contact em { display: block; color: var(--text-muted); font-size: .9rem; margin-top: .35rem; }
 .outstation-link { display: inline-block; color: var(--gold); text-decoration: none; letter-spacing: 1.7px; text-transform: uppercase; font-size: .78rem; }
+.outstation-custom-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.outstation-custom-links a { display: inline-flex; align-items: center; justify-content: center; padding: .55rem .8rem; border: 1px solid rgba(197,160,89,.32); background: rgba(197,160,89,.07); color: var(--gold); text-decoration: none; letter-spacing: 1.3px; text-transform: uppercase; font-size: .7rem; transition: all .25s ease; }
+.outstation-custom-links a:hover { background: var(--gold); color: var(--black); }
 
 .life-hero { min-height: 64vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 3rem; text-align: center; background: var(--paper); color: var(--navy); }
 .life-hero .eyebrow, .readings-hero .eyebrow { color: var(--brown); letter-spacing: 4px; text-transform: uppercase; font-size: .85rem; margin-bottom: 1.1rem; }
