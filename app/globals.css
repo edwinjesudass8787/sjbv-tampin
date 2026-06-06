@@ -45,7 +45,7 @@ a { color: inherit; }
 .nav-links a { color: var(--white); text-decoration: none; font-family: 'EthicSerif-Light', serif; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; transition: color .3s ease; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 .secondary-nav-shell { position: relative; border-bottom: 1px solid rgba(197,160,89,.2); background: rgba(10,10,10,.95); }
-.secondary-nav { display: grid; grid-template-columns: repeat(4, 1fr); }
+.secondary-nav { display: grid; grid-template-columns: repeat(5, 1fr); }
 .secondary-nav a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: .75rem 1rem; border-right: 1px solid rgba(197,160,89,.16); color: var(--text-muted); text-align: center; text-decoration: none; font-family: 'EthicSerif-Light', serif; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; transition: all .25s ease; }
 .secondary-nav a:last-child { border-right: 0; }
 .secondary-nav a:hover, .secondary-nav a.active { color: var(--gold); background: rgba(197,160,89,.09); }
@@ -138,12 +138,12 @@ a { color: inherit; }
 .life-hero h1 { color: var(--navy); }
 .life-hero p { color: rgba(16,24,43,.72); }
 .life-main { padding: 2rem 5% 6rem; background: var(--paper); color: var(--navy); }
-.litany-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; background: linear-gradient(180deg, rgba(10,10,10,.54), rgba(10,10,10,.84)), url('/litany.png') center / cover no-repeat; }
+.litany-hero { min-height: calc(56vh - var(--nav-stack-height)); margin-top: var(--nav-stack-height); display: flex; align-items: center; justify-content: center; padding: 4rem 5%; text-align: center; position: relative; background: linear-gradient(180deg, rgba(10,10,10,.54), rgba(10,10,10,.84)), url('/litany.png') center / cover no-repeat; }
 .litany-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, transparent 49%, rgba(197,160,89,.08) 50%, transparent 51%), radial-gradient(circle at 50% 50%, transparent 0 38%, rgba(197,160,89,.1) 39%, transparent 40%); background-size: 96px 96px, 240px 240px; opacity: .28; }
 .litany-main { padding: 4rem 5% 6rem; background: radial-gradient(circle at 50% 0%, rgba(197,160,89,.09), transparent 28%), var(--black); }
 .litany-card { max-width: 880px; margin: 0 auto; padding: clamp(1.4rem, 4vw, 3rem); border: 1px solid rgba(197,160,89,.24); background: linear-gradient(145deg, rgba(26,26,26,.96), rgba(12,12,12,.98)); box-shadow: 0 18px 44px rgba(0,0,0,.3); }
 .litany-card h2 { color: var(--gold); font-family: 'EthicSerif-Light', serif; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.15; margin-bottom: 2rem; text-align: center; }
-.litany-prayer { max-width: 680px; margin: 0 auto; }
+.litany-prayer { max-width: 680px; margin: 0 auto; text-align: center; }
 .litany-prayer p { color: var(--text-light); font-size: clamp(1.02rem, 1.8vw, 1.18rem); line-height: 1.72; margin-bottom: .35rem; }
 .litany-break { height: 1.2rem; }
 .timeline { max-width: 1280px; margin: 0 auto; display: grid; gap: 5rem; }
@@ -534,7 +534,8 @@ a { color: inherit; }
   .outstation-grid { grid-template-columns: 1fr; }
   .outstation-actions .bulletin-button { width: 100%; justify-content: center; }
   .contact-item { padding: 1.25rem; }
-  .life-hero, .litany-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .announcements-hero, .ministries-hero, .bec-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
+  .life-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .announcements-hero, .ministries-hero, .bec-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
+  .litany-hero { min-height: calc(48vh - var(--nav-stack-height)); padding: 3rem 1.25rem; }
   .life-main, .litany-main, .readings-main, .rosary-main, .news-main, .announcements-main, .ministries-main, .bec-main, .social-main, .sdg-main, .vianney-map-main { padding: 3rem 1.25rem 4rem; }
   .social-board { column-count: 3; }
   .vianney-map-shell { grid-template-columns: 1fr; }
