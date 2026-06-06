@@ -45,7 +45,7 @@ a { color: inherit; }
 .nav-links a { color: var(--white); text-decoration: none; font-family: 'EthicSerif-Light', serif; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; transition: color .3s ease; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 .secondary-nav-shell { position: relative; border-bottom: 1px solid rgba(197,160,89,.2); background: rgba(10,10,10,.95); }
-.secondary-nav { display: grid; grid-template-columns: repeat(5, 1fr); }
+.secondary-nav { display: grid; grid-template-columns: repeat(6, 1fr); }
 .secondary-nav a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: .75rem 1rem; border-right: 1px solid rgba(197,160,89,.16); color: var(--text-muted); text-align: center; text-decoration: none; font-family: 'EthicSerif-Light', serif; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; transition: all .25s ease; }
 .secondary-nav a:last-child { border-right: 0; }
 .secondary-nav a:hover, .secondary-nav a.active { color: var(--gold); background: rgba(197,160,89,.09); }
@@ -146,6 +146,19 @@ a { color: inherit; }
 .litany-prayer { max-width: 680px; margin: 0 auto; text-align: center; }
 .litany-prayer p { color: var(--text-light); font-size: clamp(1.02rem, 1.8vw, 1.18rem); line-height: 1.72; margin-bottom: .35rem; }
 .litany-break { height: 1.2rem; }
+.daily-prayer-hero { min-height: 56vh; display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; text-align: center; position: relative; background: radial-gradient(circle at 50% 10%, rgba(197,160,89,.22), transparent 34%), linear-gradient(180deg, #111, var(--black)); }
+.daily-prayer-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(90deg, transparent 49%, rgba(197,160,89,.08) 50%, transparent 51%), radial-gradient(circle at 50% 50%, transparent 0 38%, rgba(197,160,89,.1) 39%, transparent 40%); background-size: 96px 96px, 240px 240px; opacity: .34; }
+.daily-prayer-main { padding: 4rem 5% 6rem; background: radial-gradient(circle at 50% 0%, rgba(197,160,89,.09), transparent 28%), var(--black); }
+.daily-prayer-shell { max-width: 880px; margin: 0 auto; }
+.daily-prayer-picker { display: grid; grid-template-columns: 1fr auto; gap: .8rem; align-items: end; margin-bottom: 1.2rem; padding: 1.1rem; border: 1px solid rgba(197,160,89,.2); background: rgba(26,26,26,.72); }
+.daily-prayer-picker label { grid-column: 1 / -1; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; font-size: .76rem; }
+.daily-prayer-picker input { min-height: 43px; padding: .65rem .85rem; border: 1px solid rgba(197,160,89,.35); background: rgba(10,10,10,.72); color: var(--text-light); color-scheme: dark; font: inherit; box-sizing: border-box; }
+.daily-prayer-picker button { cursor: pointer; }
+.daily-prayer-card { padding: clamp(1.4rem, 4vw, 3rem); border: 1px solid rgba(197,160,89,.24); background: linear-gradient(145deg, rgba(26,26,26,.96), rgba(12,12,12,.98)); box-shadow: 0 18px 44px rgba(0,0,0,.3); text-align: center; }
+.daily-prayer-card > span { display: block; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-size: .78rem; margin-bottom: .8rem; }
+.daily-prayer-card h2 { color: var(--white); font-family: 'EthicSerif-Light', serif; font-size: clamp(1.7rem, 3.6vw, 2.8rem); line-height: 1.14; margin-bottom: 1.6rem; }
+.daily-prayer-text { max-width: 680px; margin: 0 auto; color: var(--text-light); font-size: clamp(1.05rem, 1.8vw, 1.22rem); line-height: 1.75; }
+.daily-prayer-source { display: inline-block; margin-top: 2rem; color: var(--gold); text-decoration: none; letter-spacing: 1.7px; text-transform: uppercase; font-size: .78rem; }
 .timeline { max-width: 1280px; margin: 0 auto; display: grid; gap: 5rem; }
 .life-card { display: grid; grid-template-columns: minmax(280px,.92fr) minmax(320px,1fr); align-items: center; gap: clamp(2rem,5vw,5rem); min-height: 440px; }
 .life-card:nth-child(even) { grid-template-columns: minmax(320px,1fr) minmax(280px,.92fr); }
@@ -517,7 +530,7 @@ a { color: inherit; }
   .nav-links { position: absolute; top: calc(100% + 1px); left: 0; right: 0; display: grid; gap: 0; padding: .75rem 1rem 1rem; background: rgba(10,10,10,.98); border-bottom: 1px solid rgba(197,160,89,.22); box-shadow: 0 18px 34px rgba(0,0,0,.45); opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .2s ease, transform .2s ease; }
   .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .nav-links a { display: block; padding: .9rem 0; font-size: .86rem; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .secondary-nav { overflow-x: auto; grid-template-columns: repeat(5, minmax(160px, 1fr)); scrollbar-width: none; scroll-behavior: smooth; scroll-padding: 0 2.4rem; }
+  .secondary-nav { overflow-x: auto; grid-template-columns: repeat(6, minmax(160px, 1fr)); scrollbar-width: none; scroll-behavior: smooth; scroll-padding: 0 2.4rem; }
   .secondary-nav-arrow { position: absolute; top: 0; bottom: 0; z-index: 2; width: 32px; display: grid; place-items: center; color: var(--gold); pointer-events: none; font-size: 1.35rem; line-height: 1; }
   .secondary-nav-arrow-left { left: 0; background: linear-gradient(90deg, rgba(10,10,10,.98), rgba(10,10,10,.12)); }
   .secondary-nav-arrow-right { right: 0; background: linear-gradient(270deg, rgba(10,10,10,.98), rgba(10,10,10,.12)); }
@@ -534,9 +547,9 @@ a { color: inherit; }
   .outstation-grid { grid-template-columns: 1fr; }
   .outstation-actions .bulletin-button { width: 100%; justify-content: center; }
   .contact-item { padding: 1.25rem; }
-  .life-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .announcements-hero, .ministries-hero, .bec-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
+  .life-hero, .daily-prayer-hero, .readings-hero, .rosary-hero, .news-hero, .gallery-hero, .announcements-hero, .ministries-hero, .bec-hero, .social-hero, .sdg-hero, .vianney-map-hero { min-height: 48vh; padding: 7rem 1.25rem 3rem; }
   .litany-hero { min-height: calc(48vh - var(--nav-stack-height)); padding: 3rem 1.25rem; }
-  .life-main, .litany-main, .readings-main, .rosary-main, .news-main, .announcements-main, .ministries-main, .bec-main, .social-main, .sdg-main, .vianney-map-main { padding: 3rem 1.25rem 4rem; }
+  .life-main, .litany-main, .daily-prayer-main, .readings-main, .rosary-main, .news-main, .announcements-main, .ministries-main, .bec-main, .social-main, .sdg-main, .vianney-map-main { padding: 3rem 1.25rem 4rem; }
   .social-board { column-count: 3; }
   .vianney-map-shell { grid-template-columns: 1fr; }
   .vianney-globe-stage { min-height: 560px; }

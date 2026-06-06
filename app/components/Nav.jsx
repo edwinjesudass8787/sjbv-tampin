@@ -19,6 +19,7 @@ export default function Nav({ active }) {
   const secondaryLinks = [
     { href: '/life', label: 'Life of St. John', key: 'life' },
     { href: '/litany', label: 'Litany', key: 'litany' },
+    { href: '/daily-prayer', label: 'Daily Prayer', key: 'daily-prayer' },
     { href: '/readings', label: 'Readings', key: 'readings' },
     { href: '/sdg', label: 'SDG', key: 'sdg' },
     { href: '/rosary', label: 'Rosary', key: 'rosary' },
