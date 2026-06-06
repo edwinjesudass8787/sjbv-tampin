@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback } from 'react';
 
 const languages = [
   { code: 'en', label: 'English' },
-  { code: 'ms', label: 'Bahasa Malaysia' },
   { code: 'zh', label: 'Mandarin' },
   { code: 'ta', label: 'Tamil' },
 ];
